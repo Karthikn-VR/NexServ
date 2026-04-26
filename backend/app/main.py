@@ -8,7 +8,8 @@ from fastapi.exceptions import RequestValidationError
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
-
+from fastapi.middleware.cors import CORSMiddleware
+from app.core.config import settings
 from .core.config import settings
 from .core.logging_config import logger
 from .core.ratelimit import limiter
@@ -19,6 +20,8 @@ from .db.init_db import init_db
 app = FastAPI(title=settings.PROJECT_NAME)
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
+
 
 # CORS
 app.add_middleware(
