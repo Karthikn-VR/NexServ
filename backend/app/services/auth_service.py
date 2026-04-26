@@ -9,12 +9,18 @@ import logging
 logging.getLogger('passlib').setLevel(logging.ERROR)
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
+def get_safe_password(password: str) -> str:
+    pwd_bytes = password.encode('utf-8')
+    if len(pwd_bytes) > 72:
+        return pwd_bytes[:72].decode('utf-8', 'ignore')
+    return password
+
 def hash_password(password: str) -> str:
-    return pwd_context.hash(password[:72])
+    return pwd_context.hash(get_safe_password(password))
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     try:
-        return pwd_context.verify(plain_password[:72], hashed_password)
+        return pwd_context.verify(get_safe_password(plain_password), hashed_password)
     except Exception:
         return False
 
