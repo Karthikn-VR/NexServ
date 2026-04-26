@@ -25,6 +25,7 @@ class Settings(BaseSettings):
     SUPABASE_URL: Optional[str] = None
     SUPABASE_KEY: Optional[str] = None
     SUPABASE_BUCKET: str = "dishes"
+
     
     @property
     def BACKEND_CORS_ORIGINS(self) -> List[str]:
@@ -32,6 +33,7 @@ class Settings(BaseSettings):
             "https://nex-serv.vercel.app",
             "https://nex-serv-rajmru3m8-karthikn-vrs-projects.vercel.app"
         ]
+
 
     @field_validator("DATABASE_URL", "JWT_SECRET")
     @classmethod

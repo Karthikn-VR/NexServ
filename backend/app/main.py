@@ -14,24 +14,23 @@ from app.core.ratelimit import limiter
 from app.routes import api_auth, api_dishes, api_coupons, api_orders, api_driver
 from app.db.init_db import init_db
 
-# Rate limiting setup
+# Initialize FastAPI
 app = FastAPI(title=settings.PROJECT_NAME)
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
-
-
 # CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "https://nex-serv.vercel.app",
-        "https://nex-serv-rajmru3m8-karthikn-vrs-projects.vercel.app"
-    ],
+    allow_origins=settings.BACKEND_CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# 2. Rate Limiting Setup
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 # ------------------ PRE-FLIGHT FIX ------------------
 @app.options("/{full_path:path}")
