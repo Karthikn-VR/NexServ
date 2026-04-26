@@ -30,6 +30,15 @@ export const apiClient = async (endpoint, options = {}) => {
     const text = await response.text();
     const data = text ? JSON.parse(text) : {};
 
+    // Debug: Log the full response for troubleshooting
+    console.log(`API Response [${response.status} ${response.statusText}]:`, {
+      url,
+      status: response.status,
+      statusText: response.statusText,
+      data: data,
+      ok: response.ok
+    });
+
     if (!response.ok) {
       // Standardized error handling for our new backend format
       let errorMessage = data.message || 'Request failed';
