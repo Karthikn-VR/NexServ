@@ -54,15 +54,27 @@ export const AuthProvider = ({ children }) => {
   };
 
   const login = async (email, password) => {
-    const data = await authAPI.login(email, password);
-    if (data && data.access_token) {
-      localStorage.setItem('access_token', data.access_token);
+    const response = await authAPI.login(email, password);
+    
+    // Check if response has success status and proper structure
+    if (response && response.status === "success" && response.data && response.data.access_token) {
+      localStorage.setItem('access_token', response.data.access_token);
       const me = await authAPI.me();
       setUser(me);
       setIsAuthenticated(true);
       setIsAdmin(checkIsAdmin(me));
       return me;
     }
+    
+    // Handle different error response formats
+    if (response && response.message) {
+      throw new Error(response.message);
+    }
+    
+    if (response && response.detail) {
+      throw new Error(response.detail);
+    }
+    
     throw new Error('Login failed');
   };
 
