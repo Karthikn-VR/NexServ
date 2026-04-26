@@ -35,6 +35,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# ------------------ PRE-FLIGHT FIX ------------------
+@app.options("/{full_path:path}")
+async def options_handler(full_path: str):
+    return JSONResponse(status_code=200, content={})
+
 # Logging middleware
 @app.middleware("http")
 async def log_requests(request: Request, call_next):
