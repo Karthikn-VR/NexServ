@@ -16,34 +16,43 @@ from app.db.init_db import init_db
 
 # Initialize FastAPI
 app = FastAPI(title=settings.PROJECT_NAME)
-app.state.limiter = limiter
-app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
-# CORS
+# 1. CORSMiddleware (MUST BE FIRST)
+origins = [
+    "https://nex-serv.vercel.app",
+    "https://nex-serv-rajmru3m8-karthikn-vrs-projects.vercel.app"
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.BACKEND_CORS_ORIGINS,
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# 2. Rate Limiting Setup
+# 2. Global CORS Header Enforcer
+@app.middleware("http")
+async def ensure_cors_headers(request: Request, call_next):
+    response = await call_next(request)
+    origin = request.headers.get("origin")
+    if origin in origins:
+        response.headers["Access-Control-Allow-Origin"] = origin
+        response.headers["Access-Control-Allow-Credentials"] = "true"
+        response.headers["Access-Control-Allow-Headers"] = "*"
+        response.headers["Access-Control-Allow-Methods"] = "*"
+    return response
+
+# 3. Rate Limiting Setup
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
-# ------------------ PRE-FLIGHT FIX ------------------
-@app.options("/{full_path:path}")
-async def options_handler(full_path: str):
-    return JSONResponse(status_code=200, content={})
-
-# Logging middleware
+# 4. Logging middleware
 @app.middleware("http")
 async def log_requests(request: Request, call_next):
     start_time = time.time()
     response = await call_next(request)
     duration = time.time() - start_time
-    
     logger.info(
         f"Method: {request.method} Path: {request.url.path} "
         f"Status: {response.status_code} Duration: {duration:.2f}s"
