@@ -34,16 +34,16 @@ class Settings(BaseSettings):
     @property
     def BACKEND_CORS_ORIGINS(self) -> List[str]:
         if self.ENV == "development":
-            return ["*"]
-        
-        origins = [
-            "http://localhost:5173",
-            "http://127.0.0.1:5173",
-            "http://localhost:5174",
-            "http://127.0.0.1:5174",
+            return [
+                "http://localhost:5173",
+                "http://127.0.0.1:5173"
+            ]
+
+        return [
             self.FRONTEND_URL,
+            "https://nex-serv.vercel.app",
+            "https://nex-serv-rajmru3m8-karthikn-vrs-projects.vercel.app"
         ]
-        return [o for o in origins if o]
 
     @field_validator("DATABASE_URL", "JWT_SECRET")
     @classmethod
