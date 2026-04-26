@@ -4,6 +4,7 @@ from passlib.context import CryptContext
 from ..core.config import settings
 from fastapi import HTTPException, status
 import logging
+from ..core.logging_config import logger
 
 # Suppress the annoying passlib bcrypt version warning
 logging.getLogger('passlib').setLevel(logging.ERROR)
