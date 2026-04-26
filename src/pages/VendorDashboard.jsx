@@ -1,0 +1,195 @@
+import { useState, useEffect } from "react";
+import { OrderCard } from "../components/OrderCard";
+import { orderAPI } from "../services/api/order";
+
+export const VendorDashboard = () => {
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [actionLoading, setActionLoading] = useState(null);
+  const [statusFilter, setStatusFilter] = useState("ALL");
+
+  const fetchOrders = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      
+      const response = await orderAPI.getVendorOrders();
+      const transformedOrders = (response.orders || []).map((order) => ({
+        ...order,
+        total: order.total ?? order.final_amount ?? 0,
+        items: order.items || [],
+      }));
+      setOrders(transformedOrders);
+    } catch (err) {
+      console.error("Failed to fetch orders:", err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchOrders();
+  }, []);
+
+  const updateOrderStatus = async (orderId, status) => {
+    setActionLoading(orderId);
+    setError(null);
+    const targetOrder = orders.find(o => o.id === orderId);
+
+    try {
+      if (status === "ACCEPTED") await orderAPI.approveOrder(orderId);
+      else if (status === "REJECTED") {
+        const reason = window.prompt("Enter rejection reason for customer email:", "Rejected by vendor");
+        if (!reason) {
+          setActionLoading(null);
+          return;
+        }
+        await orderAPI.rejectOrder(orderId, reason);
+      }
+      else if (status === "OUT_OF_STOCK") await orderAPI.outOfStock(orderId);
+      else if (status === "ASSIGNED") {
+        console.log("=== ASSIGNING DELIVERY FOR ORDER ===", targetOrder);
+        await orderAPI.assignDelivery(orderId);
+        if (targetOrder) {
+          await orderAPI.assignExternal(targetOrder);
+        }
+      }
+      fetchOrders();
+    } catch (err) {
+      console.error("Failed to update order:", err);
+      setError(`Action failed: ${err.message}`);
+    } finally {
+      setActionLoading(null);
+    }
+  };
+
+  const handleAccept = (orderId) => updateOrderStatus(orderId, "ACCEPTED");
+  const handleReject = (orderId) => updateOrderStatus(orderId, "REJECTED");
+  const handleOutOfStock = (orderId) => updateOrderStatus(orderId, "OUT_OF_STOCK");
+  const handleAssignDelivery = (orderId) => updateOrderStatus(orderId, "ASSIGNED");
+
+  // Filter and Sort Logic
+  const filteredOrders = orders.filter(order => {
+    if (statusFilter === "ALL") return true;
+    if (statusFilter === "NEW") return order.status === "PLACED";
+    if (statusFilter === "ACCEPTED") return order.status === "ACCEPTED";
+    if (statusFilter === "ASSIGNED") return ["ASSIGNED", "IN_TRANSIT", "DELIVERED"].includes(order.status);
+    if (statusFilter === "REJECTED") return ["REJECTED", "OUT_OF_STOCK"].includes(order.status);
+    return true;
+  });
+
+  const sortedOrders = [...filteredOrders].sort((a, b) => {
+    // Priority helper: Lower number = higher in the list
+    const getPriority = (status) => {
+      if (status === "PLACED") return 1;    // Newest
+      if (status === "ACCEPTED") return 2;  // Unassigned
+      return 3;                             // Assigned, Delivered, etc.
+    };
+
+    const priorityA = getPriority(a.status);
+    const priorityB = getPriority(b.status);
+
+    if (priorityA !== priorityB) {
+      return priorityA - priorityB;
+    }
+    
+    // Within the same priority group, sort by ID descending (newer first)
+    return b.id - a.id;
+  });
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#0a0806] flex items-center justify-center py-8 px-4">
+        <div className="text-center">
+          <div className="relative w-16 h-16 mx-auto mb-6">
+            <div className="absolute inset-0 border-4 border-orange-500/20 rounded-full"></div>
+            <div className="absolute inset-0 border-4 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
+          </div>
+          <p className="text-gray-400 font-medium tracking-widest uppercase text-xs">Loading Dashboard...</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-[#0a0806] py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden text-white">
+      {/* Background Blobs */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
+        <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-orange-500/10 rounded-full blur-[120px] animate-pulse"></div>
+        <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-orange-600/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '2s' }}></div>
+      </div>
+
+      <div className="max-w-4xl mx-auto relative z-10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+          <div>
+            <p className="text-orange-500 font-black uppercase tracking-widest text-sm mb-3">Management Console</p>
+            <h1 className="text-4xl md:text-5xl font-black tracking-tight">Vendor <span className="text-orange-500">Dashboard</span></h1>
+            <p className="text-gray-400 mt-4 text-lg font-medium">Manage and track your customer orders in real-time.</p>
+          </div>
+          
+          {/* Filter Tabs */}
+          <div className="flex bg-white/[0.03] backdrop-blur-xl p-1.5 rounded-2xl border border-white/10 shadow-2xl">
+            {[
+              { id: "ALL", label: "All" },
+              { id: "NEW", label: "New" },
+              { id: "ACCEPTED", label: "Accepted" },
+              { id: "ASSIGNED", label: "Assigned" },
+              { id: "REJECTED", label: "Rejected" }
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setStatusFilter(tab.id)}
+                className={`px-5 py-2.5 text-xs font-black uppercase tracking-widest rounded-xl transition-all duration-300 ${
+                  statusFilter === tab.id
+                    ? "bg-orange-500 text-white shadow-lg shadow-orange-500/25 scale-105"
+                    : "text-gray-500 hover:text-gray-300"
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {error && (
+          <div className="bg-red-500/10 border border-red-500/20 p-6 rounded-[32px] mb-12 flex items-center gap-4">
+            <div className="w-12 h-12 bg-red-500/20 rounded-2xl flex items-center justify-center border border-red-500/30 flex-shrink-0">
+              <svg className="h-6 w-6 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <div>
+              <p className="text-sm font-bold text-red-400">Connection Error</p>
+              <p className="text-xs text-red-400/80 mt-0.5">{error}</p>
+            </div>
+          </div>
+        )}
+
+        <div className="space-y-8">
+          {sortedOrders.length > 0 ? (
+            sortedOrders.map((order) => (
+              <OrderCard
+                key={order.id}
+                order={order}
+                onAccept={handleAccept}
+                onReject={handleReject}
+                onOutOfStock={handleOutOfStock}
+                onAssignDelivery={handleAssignDelivery}
+                isVendor
+                disabled={actionLoading === order.id}
+              />
+            ))
+          ) : (
+            <div className="text-center py-24 bg-white/[0.02] backdrop-blur-xl rounded-[48px] border-2 border-dashed border-white/10 shadow-inner">
+              <div className="text-6xl mb-6 opacity-20 grayscale">📦</div>
+              <h3 className="text-xl font-black text-white mb-2">No orders found</h3>
+              <p className="text-gray-500 font-medium max-w-xs mx-auto">There are no orders matching the <span className="text-orange-500/80">{statusFilter.toLowerCase()}</span> filter at the moment.</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};

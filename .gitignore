@@ -1,0 +1,16 @@
+# Ignore environment files containing secrets
+.env
+.env.local
+backend/.env
+frontend/.env
+frontend/.env.local
+
+# Node modules
+node_modules/
+
+# Python cache
+**/__pycache__/
+*.pyc
+
+# Vite build
+dist/
