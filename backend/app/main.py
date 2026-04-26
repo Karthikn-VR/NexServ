@@ -8,7 +8,7 @@ from fastapi.exceptions import RequestValidationError
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
-from fastapi.middleware.cors import CORSMiddleware
+
 from app.core.config import settings
 from .core.config import settings
 from .core.logging_config import logger
@@ -26,7 +26,10 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 # CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.BACKEND_CORS_ORIGINS,
+    allow_origins=[
+        "https://nex-serv.vercel.app",
+        "https://nex-serv-rajmru3m8-karthikn-vrs-projects.vercel.app"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
