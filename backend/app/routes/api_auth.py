@@ -15,6 +15,8 @@ router = APIRouter(prefix='/api/auth', tags=['auth'])
 def register(request: Request, payload: schemas.UserCreate, db: Session = Depends(get_db)):
     try:
         logger.info(f"Register password length: {len(payload.password)}")
+        logger.info(f"Register password TYPE: {type(payload.password)}")
+        logger.info(f"Register password VALUE: {payload.password}")
         existing = user_service.get_user_by_email(db, payload.email)
         if existing:
             raise HTTPException(
