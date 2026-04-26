@@ -18,36 +18,21 @@ from app.db.init_db import init_db
 app = FastAPI(title=settings.PROJECT_NAME)
 
 # 1. CORSMiddleware (MUST BE FIRST)
-origins = [
-    "https://nex-serv.vercel.app",
-    "https://nex-serv-rajmru3m8-karthikn-vrs-projects.vercel.app"
-]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["https://nex-serv.vercel.app"],
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allow_headers=["Authorization", "Content-Type"],
+    expose_headers=["Authorization"],
+    max_age=86400,
 )
 
-# 2. Global CORS Header Enforcer
-@app.middleware("http")
-async def ensure_cors_headers(request: Request, call_next):
-    response = await call_next(request)
-    origin = request.headers.get("origin")
-    if origin in origins:
-        response.headers["Access-Control-Allow-Origin"] = origin
-        response.headers["Access-Control-Allow-Credentials"] = "true"
-        response.headers["Access-Control-Allow-Headers"] = "*"
-        response.headers["Access-Control-Allow-Methods"] = "*"
-    return response
-
-# 3. Rate Limiting Setup
+# 2. Rate Limiting Setup
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
-# 4. Logging middleware
+# 3. Logging middleware
 @app.middleware("http")
 async def log_requests(request: Request, call_next):
     start_time = time.time()
