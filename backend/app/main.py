@@ -26,9 +26,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.api_route("/{full_path:path}", methods=["OPTIONS"])
-async def preflight_handler():
-    return Response(status_code=200)
 
 # 2. Rate Limiting Setup
 app.state.limiter = limiter
