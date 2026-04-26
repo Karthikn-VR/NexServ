@@ -14,6 +14,7 @@ router = APIRouter(prefix='/api/auth', tags=['auth'])
 @limiter.limit("5/minute")
 def register(request: Request, payload: schemas.UserCreate, db: Session = Depends(get_db)):
     try:
+        logger.info(f"Register password length: {len(payload.password)}")
         existing = user_service.get_user_by_email(db, payload.email)
         if existing:
             raise HTTPException(
