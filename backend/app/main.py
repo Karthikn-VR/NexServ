@@ -1,6 +1,6 @@
 import os
 import time
-from fastapi import FastAPI, Request, status, HTTPException
+from fastapi import FastAPI, Request, status, HTTPException, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import JSONResponse
@@ -22,11 +22,13 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=["https://nex-serv.vercel.app"],
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allow_headers=["Authorization", "Content-Type"],
-    expose_headers=["Authorization"],
-    max_age=86400,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
+
+@app.api_route("/{full_path:path}", methods=["OPTIONS"])
+async def preflight_handler():
+    return Response(status_code=200)
 
 # 2. Rate Limiting Setup
 app.state.limiter = limiter
