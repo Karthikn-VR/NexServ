@@ -10,9 +10,16 @@ logging.getLogger('passlib').setLevel(logging.ERROR)
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def get_safe_password(password: str) -> str:
-    pwd_bytes = password.encode('utf-8')
-    if len(pwd_bytes) > 72:
-        return pwd_bytes[:72].decode('utf-8', 'ignore')
+    # Truncate the string itself (not bytes) to max 72 UTF-8 characters
+    if len(password.encode('utf-8')) > 72:
+        # Convert to bytes, truncate, then safely decode
+        pwd_bytes = password.encode('utf-8')[:72]
+        # Find the last valid UTF-8 sequence boundary
+        try:
+            return pwd_bytes.decode('utf-8')
+        except UnicodeDecodeError:
+            # If truncation broke a multi-byte character, remove the last byte
+            return pwd_bytes[:-1].decode('utf-8', 'ignore')
     return password
 
 def hash_password(password: str) -> str:
