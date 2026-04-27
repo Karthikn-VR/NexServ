@@ -38,9 +38,9 @@ export const Payment = () => {
         deliveryInstructions ? `DRIVER: ${deliveryInstructions}` : ''
       ].filter(Boolean).join(' | ');
 
-      console.log('User object:', user); // Debug user object
-      console.log('User email:', user?.email); // Debug email specifically
-
+      console.log('User object in payment:', user); // Debug user object
+      console.log('User email in payment:', user?.email); // Debug email specifically
+      
       const payload = {
         address: {
           full_name: address.full_name,
@@ -52,7 +52,7 @@ export const Payment = () => {
           postal_code: address.postal_code,
           country: address.country || "",
         },
-        email: user?.email || "unknown@example.com", // Ensure email is always included
+        email: user?.email ? user.email : "customer@nexserv.com", // Ensure email is always included
         coupon_code: couponCode.trim().toUpperCase(),
         special_instructions: combinedInstructions,
         items: cartItems
@@ -65,7 +65,7 @@ export const Payment = () => {
           })),
       };
 
-      console.log('Order payload:', payload); // Debug the final payload
+      console.log('Final order payload:', JSON.stringify(payload, null, 2)); // Debug the final payload
 
       const resp = await orderAPI.placeOrder(payload);
       if (!resp || resp.error) {
