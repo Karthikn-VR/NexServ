@@ -24,6 +24,7 @@ export const Payment = () => {
 
   const placeOrderAfterPayment = async () => {
     if (!address || !user) {
+      console.log('Missing address or user:', { address, user }); // Debug
       setError("Session expired. Please go back to cart and checkout again.");
       return;
     }
@@ -37,6 +38,9 @@ export const Payment = () => {
         deliveryInstructions ? `DRIVER: ${deliveryInstructions}` : ''
       ].filter(Boolean).join(' | ');
 
+      console.log('User object:', user); // Debug user object
+      console.log('User email:', user?.email); // Debug email specifically
+
       const payload = {
         address: {
           full_name: address.full_name,
@@ -48,7 +52,7 @@ export const Payment = () => {
           postal_code: address.postal_code,
           country: address.country || "",
         },
-        email: user.email,
+        email: user?.email || "", // Safe access to user email
         coupon_code: couponCode.trim().toUpperCase(),
         special_instructions: combinedInstructions,
         items: cartItems
@@ -60,6 +64,8 @@ export const Payment = () => {
             price: item.price,
           })),
       };
+
+      console.log('Order payload:', payload); // Debug the final payload
 
       const resp = await orderAPI.placeOrder(payload);
       if (!resp || resp.error) {
@@ -135,7 +141,7 @@ export const Payment = () => {
                 <div className="absolute -inset-4 bg-orange-500/20 rounded-[32px] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="relative bg-[#0d0a08] p-6 rounded-[32px] border border-white/10 shadow-inner group-hover:border-orange-500/30 transition-all duration-300">
                   <img
-                    src="http://127.0.0.1:8000/static/qr.jpeg"
+                    src="https://nexserv-mhpe.onrender.com/static/qr.jpeg"
                     alt="Payment QR"
                     className="w-56 h-56 object-cover rounded-2xl"
                   />

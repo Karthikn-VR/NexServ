@@ -19,6 +19,7 @@ export const AuthProvider = ({ children }) => {
       if (token) {
         try {
           const data = await authAPI.me();
+          console.log('User data from /api/auth/me:', data); // Debug log
           setUser(data);
           setIsAuthenticated(true);
           setIsAdmin(checkIsAdmin(data));
