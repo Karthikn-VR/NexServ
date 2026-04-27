@@ -20,6 +20,8 @@ export const AuthProvider = ({ children }) => {
         try {
           const data = await authAPI.me();
           console.log('User data from /api/auth/me:', data); // Debug log
+          console.log('User name:', data?.name); // Debug name specifically
+          console.log('User email:', data?.email); // Debug email
           setUser(data);
           setIsAuthenticated(true);
           setIsAdmin(checkIsAdmin(data));
@@ -60,11 +62,17 @@ export const AuthProvider = ({ children }) => {
     // Check if response has success status and proper structure
     if (response && response.status === "success" && response.data && response.data.access_token) {
       localStorage.setItem('access_token', response.data.access_token);
-      const me = await authAPI.me();
-      setUser(me);
+      
+      // Use the user data from the login response instead of making extra API call
+      const userData = {
+        ...response.data, // Includes email, name, role, etc.
+        id: response.data.sub || response.data.user_id // Handle different ID fields
+      };
+      
+      setUser(userData);
       setIsAuthenticated(true);
-      setIsAdmin(checkIsAdmin(me));
-      return me;
+      setIsAdmin(checkIsAdmin(userData));
+      return userData;
     }
     
     // Handle different error response formats
