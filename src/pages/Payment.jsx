@@ -52,7 +52,7 @@ export const Payment = () => {
           postal_code: address.postal_code,
           country: address.country || "",
         },
-        email: user?.email || "", // Safe access to user email
+        email: user?.email || "unknown@example.com", // Ensure email is always included
         coupon_code: couponCode.trim().toUpperCase(),
         special_instructions: combinedInstructions,
         items: cartItems
