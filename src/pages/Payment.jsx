@@ -52,7 +52,7 @@ export const Payment = () => {
           postal_code: address.postal_code,
           country: address.country || "",
         },
-        email: user?.email ? user.email : "customer@nexserv.com", // Ensure email is always included
+        email: user?.email ?? "customer@nexserv.com", // Ensure email is always included with proper fallback
         coupon_code: couponCode.trim().toUpperCase(),
         special_instructions: combinedInstructions,
         items: cartItems
