@@ -49,7 +49,7 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen">
         {isAuthenticated && <Navbar />}
         <ClickSpark
           sparkColor="#f97316"
@@ -58,7 +58,7 @@ function App() {
           sparkCount={8}
           duration={400}
         >
-          <div className="flex-1">
+          <div>
             <Routes>
               <Route path="/" element={<LandingPage />} />
               <Route path="/login" element={isAuthenticated ? <Navigate to="/menu" replace /> : <Login />} />

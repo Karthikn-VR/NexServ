@@ -74,19 +74,17 @@ export const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 z-50 transition-all duration-500 md:hidden ${isMobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-          }`}
+        className={`md:hidden ${isMobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
       >
         <div
-          className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+          className="sidebar-backdrop"
           onClick={() => setIsMobileMenuOpen(false)}
         />
         <div
-          className={`fixed top-0 right-0 w-[75%] max-w-[280px] h-screen bg-[#0a0806] border-l border-white/10 shadow-2xl transition-transform duration-500 transform flex flex-col overflow-y-auto ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
-            }`}
+          className={`mobile-sidebar ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}
         >
-          <div className="p-4 border-b border-white/5 flex items-center justify-between sticky top-0 bg-[#0a0806] z-10">
-            <span className="text-sm font-bold text-gray-400 uppercase tracking-widest">Menu</span>
+          <div className="p-4 border-b border-white/5 flex items-center justify-between flex-shrink-0">
+            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Menu</span>
             <button
               onClick={() => setIsMobileMenuOpen(false)}
               className="p-2 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-all"
@@ -95,7 +93,7 @@ export const Navbar = () => {
             </button>
           </div>
 
-          <div className="flex-grow py-4 px-2 space-y-1">
+          <div className="flex-grow py-4 px-2 space-y-1 overflow-y-auto custom-scrollbar">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
