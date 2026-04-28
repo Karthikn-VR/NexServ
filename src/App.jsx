@@ -49,27 +49,29 @@ function App() {
 
   return (
     <Router>
-      <ClickSpark
-        sparkColor="#f97316"
-        sparkSize={10}
-        sparkRadius={15}
-        sparkCount={8}
-        duration={400}
-      >
-        <div className="min-h-screen">
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/login" element={isAuthenticated ? <Navigate to="/menu" replace /> : <Login />} />
-            <Route path="/menu" element={<ProtectedRoute><Menu /></ProtectedRoute>} />
-            <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
-            <Route path="/payment" element={<ProtectedRoute><Payment /></ProtectedRoute>} />
-            <Route path="/orders" element={<ProtectedRoute><Orders /></ProtectedRoute>} />
-            <Route path="/vendor" element={<ProtectedRoute requireAdmin={true}><VendorDashboard /></ProtectedRoute>} />
-            <Route path="/tracking/:id" element={<ProtectedRoute><Tracking /></ProtectedRoute>} />
-          </Routes>
-        </div>
-      </ClickSpark>
-      {isAuthenticated && <Navbar />}
+      <div className="min-h-screen flex flex-col">
+        {isAuthenticated && <Navbar />}
+        <ClickSpark
+          sparkColor="#f97316"
+          sparkSize={10}
+          sparkRadius={15}
+          sparkCount={8}
+          duration={400}
+        >
+          <div className="flex-1">
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/login" element={isAuthenticated ? <Navigate to="/menu" replace /> : <Login />} />
+              <Route path="/menu" element={<ProtectedRoute><Menu /></ProtectedRoute>} />
+              <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
+              <Route path="/payment" element={<ProtectedRoute><Payment /></ProtectedRoute>} />
+              <Route path="/orders" element={<ProtectedRoute><Orders /></ProtectedRoute>} />
+              <Route path="/vendor" element={<ProtectedRoute requireAdmin={true}><VendorDashboard /></ProtectedRoute>} />
+              <Route path="/tracking/:id" element={<ProtectedRoute><Tracking /></ProtectedRoute>} />
+            </Routes>
+          </div>
+        </ClickSpark>
+      </div>
     </Router>
   )
 }

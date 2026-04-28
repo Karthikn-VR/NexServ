@@ -24,9 +24,9 @@ export const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-[#0a0806]/90 backdrop-blur-xl border-b border-white/5 sticky top-0 z-50 h-auto">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row flex-wrap justify-between min-h-[64px] md:min-h-[80px] items-start md:items-center py-2 md:py-0 gap-2">
+    <nav className="bg-[#0a0806]/90 backdrop-blur-xl border-b border-white/5 sticky top-0 z-[9999] h-14 md:h-[72px]">
+      <div className="max-w-7xl mx-auto px-4 h-full">
+        <div className="flex items-center justify-between h-full">
           <div className="flex items-center w-full md:w-auto justify-between h-12 md:h-auto">
             <Link to="/" className="flex items-center space-x-2" onClick={() => setIsMobileMenuOpen(false)}>
               <div className="w-8 h-8 md:w-9 md:h-9 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/30">

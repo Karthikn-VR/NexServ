@@ -270,22 +270,22 @@ export const Menu = () => {
         </div>
 
         <div className="mb-4 md:mb-10 space-y-2 md:space-y-6">
-          <div className="relative w-full md:max-w-md">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-3.5 w-3.5 md:h-5 md:w-5" />
+          <div className="relative w-full">
+            <Search className="absolute left-2.5 top-1/2 transform -translate-y-1/2 text-gray-500 h-3.5 w-3.5" />
             <input
               type="text"
-              placeholder="Search for your favorite food..."
+              placeholder="Search food..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 md:pl-12 pr-4 py-2 md:py-4 bg-white/5 border border-white/10 rounded-lg md:rounded-2xl focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 outline-none text-white placeholder-gray-500 transition-all text-[11px] md:text-base"
+              className="w-full pl-8 pr-3 py-2 bg-white/5 border border-white/10 rounded-lg focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 outline-none text-white placeholder-gray-500 transition-all text-xs"
             />
           </div>
-          <div className="flex space-x-1.5 md:space-x-3 overflow-x-auto pb-1.5 md:pb-4 scrollbar-hide -mx-3 px-3 md:mx-0 md:px-0">
+          <div className="flex gap-1.5 overflow-x-auto pb-2 scrollbar-hide">
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-3 py-1 md:px-6 md:py-2.5 rounded-full font-semibold whitespace-nowrap transition-all duration-300 text-[10px] md:text-base ${selectedCategory === category
+                className={`px-2.5 py-1 rounded-full font-semibold whitespace-nowrap transition-all duration-300 text-[10px] md:text-base ${selectedCategory === category
                     ? "bg-orange-500 text-white shadow-lg shadow-orange-500/25 scale-105"
                     : "bg-white/5 text-gray-400 hover:text-white hover:bg-white/10 border border-white/5"
                   }`}
@@ -296,7 +296,7 @@ export const Menu = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-6">
           {filteredItems.map((item) => (
             <MenuItemCard key={item.id} item={item} onAddToCart={addToCart} />
           ))}
