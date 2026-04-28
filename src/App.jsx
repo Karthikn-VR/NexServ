@@ -57,7 +57,6 @@ function App() {
         duration={400}
       >
         <div className="min-h-screen">
-          {isAuthenticated && <Navbar />}
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={isAuthenticated ? <Navigate to="/menu" replace /> : <Login />} />
@@ -70,6 +69,7 @@ function App() {
           </Routes>
         </div>
       </ClickSpark>
+      {isAuthenticated && <Navbar />}
     </Router>
   )
 }
