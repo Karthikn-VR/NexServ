@@ -98,9 +98,9 @@ export const Cart = () => {
     address_line_1: '',
     address_line_2: '',
     city: '',
-    state: '',
+    state: 'Tamil Nadu',
     postal_code: '',
-    country: '',
+    country: 'India',
   });
   const [cookingInstructions, setCookingInstructions] = useState('');
   const [error, setError] = useState(null);
@@ -110,9 +110,9 @@ export const Cart = () => {
   };
 
   const handleCheckout = async () => {
-    // validate required address fields - making address_line_1 optional as requested
-    if (!address.city || !address.full_name || !address.phone_number) {
-      setError("Please fill in your name, phone, and city");
+    // validate required address fields
+    if (!address.full_name || !address.phone_number || !address.address_line_1 || !address.city || !address.postal_code) {
+      setError("Please fill in all required address fields");
       return;
     }
 
@@ -285,14 +285,46 @@ export const Cart = () => {
               </div>
             </div>
 
-            <div className="space-y-0.5 md:space-y-1">
-              <label className="block text-[7px] md:text-[9px] font-bold text-gray-500 uppercase tracking-widest ml-0.5">City</label>
-              <input
-                value={address.city}
-                onChange={(e) => setAddress({ ...address, city: e.target.value })}
-                placeholder="Enter your city"
-                className="w-full px-3 py-2 md:px-4 md:py-3 bg-white/5 border border-white/10 rounded-lg md:rounded-xl focus:ring-1 focus:ring-orange-500/50 outline-none text-white placeholder-gray-600 transition-all text-[11px] md:text-sm"
-              />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
+              <div className="space-y-0.5 md:space-y-1">
+                <label className="block text-[7px] md:text-[9px] font-bold text-gray-500 uppercase tracking-widest ml-0.5">Address Line 1</label>
+                <input
+                  value={address.address_line_1}
+                  onChange={(e) => setAddress({ ...address, address_line_1: e.target.value })}
+                  placeholder="House/Flat No, Street"
+                  className="w-full px-3 py-2 md:px-4 md:py-3 bg-white/5 border border-white/10 rounded-lg md:rounded-xl focus:ring-1 focus:ring-orange-500/50 outline-none text-white placeholder-gray-600 transition-all text-[11px] md:text-sm"
+                />
+              </div>
+              <div className="space-y-0.5 md:space-y-1">
+                <label className="block text-[7px] md:text-[9px] font-bold text-gray-500 uppercase tracking-widest ml-0.5">Address Line 2 (Optional)</label>
+                <input
+                  value={address.address_line_2}
+                  onChange={(e) => setAddress({ ...address, address_line_2: e.target.value })}
+                  placeholder="Landmark, Area"
+                  className="w-full px-3 py-2 md:px-4 md:py-3 bg-white/5 border border-white/10 rounded-lg md:rounded-xl focus:ring-1 focus:ring-orange-500/50 outline-none text-white placeholder-gray-600 transition-all text-[11px] md:text-sm"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2 md:gap-4">
+              <div className="space-y-0.5 md:space-y-1">
+                <label className="block text-[7px] md:text-[9px] font-bold text-gray-500 uppercase tracking-widest ml-0.5">City</label>
+                <input
+                  value={address.city}
+                  onChange={(e) => setAddress({ ...address, city: e.target.value })}
+                  placeholder="Chennai"
+                  className="w-full px-3 py-2 md:px-4 md:py-3 bg-white/5 border border-white/10 rounded-lg md:rounded-xl focus:ring-1 focus:ring-orange-500/50 outline-none text-white placeholder-gray-600 transition-all text-[11px] md:text-sm"
+                />
+              </div>
+              <div className="space-y-0.5 md:space-y-1">
+                <label className="block text-[7px] md:text-[9px] font-bold text-gray-500 uppercase tracking-widest ml-0.5">Pincode</label>
+                <input
+                  value={address.postal_code}
+                  onChange={(e) => setAddress({ ...address, postal_code: e.target.value })}
+                  placeholder="600001"
+                  className="w-full px-3 py-2 md:px-4 md:py-3 bg-white/5 border border-white/10 rounded-lg md:rounded-xl focus:ring-1 focus:ring-orange-500/50 outline-none text-white placeholder-gray-600 transition-all text-[11px] md:text-sm"
+                />
+              </div>
             </div>
 
             <div className="space-y-0.5 md:space-y-1">

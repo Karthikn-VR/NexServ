@@ -45,6 +45,7 @@ class OrderOut(BaseModel):
     final_amount: float
     address: str
     email: str
+    special_instructions: Optional[str] = None
     created_at: datetime
     items: List[OrderItemOut]
 

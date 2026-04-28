@@ -45,7 +45,8 @@ def create_order(
         total_amount=total_amount,
         final_amount=final_amount,
         address=address,
-        email=email
+        email=email,
+        special_instructions=special_instructions
     )
     db.add(order)
     db.flush()  # Get order ID

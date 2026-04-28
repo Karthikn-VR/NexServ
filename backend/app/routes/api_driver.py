@@ -8,7 +8,7 @@ from ..constants import STATUS_ASSIGNED, STATUS_DELIVERED
 
 router = APIRouter(prefix='/api/driver', tags=['driver'])
 
-@router.post('/receive-order')
+@router.post('/receive-orders')
 async def receive_order(request: Request):
     try:
         data = await request.json()
@@ -17,7 +17,7 @@ async def receive_order(request: Request):
         print(f"Error receiving order in driver endpoint: {e}")
         return {"status": "error", "message": str(e)}
 
-@router.get('/receive-order')
+@router.get('/receive-orders')
 async def get_all_orders(db: Session = Depends(get_db)):
     """Endpoint to view all assigned order data from the database"""
     # Fetch all orders that are either ASSIGNED or DELIVERED (to show history)
@@ -26,7 +26,10 @@ async def get_all_orders(db: Session = Depends(get_db)):
     ).order_by(models.Order.created_at.desc()).all()
 
     if not orders:
-        return {"message": "No assigned orders found in the database."}
+        return {
+            "count": 0,
+            "orders": []
+        }
 
     driver_orders = []
     for order in orders:
@@ -39,7 +42,16 @@ async def get_all_orders(db: Session = Depends(get_db)):
             address_data = json.loads(order.address) if isinstance(order.address, str) else order.address
             customer_name = address_data.get('full_name', 'Customer')
         except:
-            address_data = order.address
+            address_data = {
+                "full_name": "Customer",
+                "phone_number": "",
+                "address_line_1": order.address,
+                "address_line_2": "",
+                "city": "",
+                "state": "",
+                "postal_code": "",
+                "country": ""
+            }
             customer_name = "Customer"
 
         driver_orders.append({
