@@ -50,16 +50,16 @@ export const Orders = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0806] py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div className="min-h-screen bg-[#0a0806] py-16 md:py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Background Blobs */}
-      <div className="pointer-events-none absolute -left-40 top-20 w-[500px] h-[500px] bg-orange-500/15 rounded-full blur-[140px]" />
-      <div className="pointer-events-none absolute -right-32 bottom-0 w-[500px] h-[500px] bg-green-500/10 rounded-full blur-[140px]" />
+      <div className="pointer-events-none absolute -left-40 top-20 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-orange-500/15 rounded-full blur-[80px] md:blur-[140px]" />
+      <div className="pointer-events-none absolute -right-32 bottom-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-green-500/10 rounded-full blur-[80px] md:blur-[140px]" />
       <div className="pointer-events-none absolute inset-0 opacity-[0.03] [background-image:radial-gradient(circle_at_1px_1px,white_1px,transparent_0)] [background-size:32px_32px]" />
 
       <div className="max-w-4xl mx-auto relative z-10">
-        <div className="mb-12">
-          <p className="text-orange-500 font-medium tracking-widest uppercase text-xs mb-3">Order History</p>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight">Your <span className="text-orange-500">Orders</span></h1>
+        <div className="mb-8 md:mb-12">
+          <p className="text-orange-500 font-medium tracking-widest uppercase text-[10px] md:text-xs mb-2 md:mb-3">Order History</p>
+          <h1 className="text-responsive-h2 font-extrabold text-white tracking-tight">Your <span className="text-orange-500">Orders</span></h1>
         </div>
 
         {error && (

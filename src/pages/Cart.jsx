@@ -164,21 +164,21 @@ export const Cart = () => {
       <div className="pointer-events-none absolute -right-32 bottom-0 w-[500px] h-[500px] bg-green-500/5 rounded-full blur-[140px]" />
       <div className="pointer-events-none absolute inset-0 opacity-[0.02] [background-image:radial-gradient(circle_at_1px_1px,white_1px,transparent_0)] [background-size:32px_32px]" />
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 relative z-10">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-10 relative z-10">
         
         {/* Left Side: Beverages Add-ons */}
-        <div className="lg:col-span-3 space-y-8">
-          <div className="bg-white/[0.03] backdrop-blur-xl rounded-3xl p-8 border border-white/10 shadow-2xl">
-            <div className="flex items-center space-x-3 mb-8">
+        <div className="lg:col-span-3 order-2 lg:order-1 space-y-8">
+          <div className="bg-white/[0.03] backdrop-blur-xl rounded-2xl md:rounded-3xl p-6 md:p-8 border border-white/10 shadow-2xl">
+            <div className="flex items-center space-x-3 mb-6 md:mb-8">
               <div className="w-8 h-8 bg-orange-500/20 rounded-lg flex items-center justify-center">
                 <Coffee className="h-4 w-4 text-orange-500" />
               </div>
               <h2 className="text-lg font-extrabold text-white tracking-tight">Beverages</h2>
             </div>
-            <div className="space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 md:gap-6">
               {addonItems.filter(i => i.category === 'Beverages').map(item => (
                   <div key={item.id} className="group relative rounded-2xl overflow-hidden border border-white/5 hover:border-orange-500/30 transition-all duration-300 bg-white/5">
-                    <div className="h-28 w-full overflow-hidden">
+                    <div className="h-24 md:h-28 w-full overflow-hidden">
                       <img 
                         src={item.image_url} 
                         alt={item.name} 
@@ -205,11 +205,11 @@ export const Cart = () => {
         </div>
 
         {/* Middle Side: Cart Content */}
-        <div className="lg:col-span-6 space-y-8">
-          <div className="flex items-end justify-between mb-2">
+        <div className="lg:col-span-6 order-1 lg:order-2 space-y-6 md:space-y-8">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-2">
             <div>
-              <p className="text-orange-500 font-medium tracking-wider uppercase text-xs mb-1">Your Order</p>
-              <h1 className="text-4xl font-black text-white tracking-tight">Review <span className="text-orange-500">Cart</span></h1>
+              <p className="text-orange-500 font-medium tracking-wider uppercase text-[10px] md:text-xs mb-1">Your Order</p>
+              <h1 className="text-responsive-h2 font-black text-white tracking-tight">Review <span className="text-orange-500">Cart</span></h1>
             </div>
             <p className="text-gray-500 text-sm font-medium">{cartItems.length} items</p>
           </div>
@@ -225,15 +225,15 @@ export const Cart = () => {
             ))}
           </div>
 
-          <div className="bg-white/[0.03] backdrop-blur-xl rounded-3xl shadow-2xl p-8 space-y-8 border border-white/10">
+          <div className="bg-white/[0.03] backdrop-blur-xl rounded-2xl md:rounded-3xl shadow-2xl p-6 md:p-8 space-y-6 md:space-y-8 border border-white/10">
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-orange-500/20 rounded-xl flex items-center justify-center">
                 <ShoppingCart className="h-5 w-5 text-orange-500" />
               </div>
-              <h2 className="text-2xl font-black text-white tracking-tight">Delivery Details</h2>
+              <h2 className="text-xl md:text-2xl font-black text-white tracking-tight">Delivery Details</h2>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
               <div className="space-y-2">
                 <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest ml-1">Full name</label>
                 <input
@@ -304,9 +304,9 @@ export const Cart = () => {
         </div>
 
         {/* Right Side: Order Summary */}
-        <div className="lg:col-span-3">
-          <div className="bg-white/[0.03] backdrop-blur-xl rounded-3xl p-8 border border-white/10 shadow-2xl sticky top-32">
-            <h2 className="text-xl font-extrabold text-white mb-8 tracking-tight">Order Summary</h2>
+        <div className="lg:col-span-3 order-3">
+          <div className="bg-white/[0.03] backdrop-blur-xl rounded-2xl md:rounded-3xl p-6 md:p-8 border border-white/10 shadow-2xl lg:sticky lg:top-32">
+            <h2 className="text-lg md:text-xl font-extrabold text-white mb-6 md:mb-8 tracking-tight">Order Summary</h2>
             <div className="space-y-4 text-sm">
               <div className="flex justify-between text-gray-400">
                 <span>Subtotal</span>
@@ -316,9 +316,9 @@ export const Cart = () => {
                 <span>Extra Charges</span>
                 <span className="text-white font-bold">₹{extraCharges.total}</span>
               </div>
-              <div className="pt-6 mt-6 border-t border-white/10 flex justify-between items-center">
+              <div className="pt-4 md:pt-6 mt-4 md:mt-6 border-t border-white/10 flex justify-between items-center">
                 <span className="text-base font-bold text-white">Total</span>
-                <span className="text-2xl font-black text-orange-500">₹{total}</span>
+                <span className="text-xl md:text-2xl font-black text-orange-500">₹{total}</span>
               </div>
             </div>
 
@@ -330,7 +330,7 @@ export const Cart = () => {
 
             <button
               onClick={handleCheckout}
-              className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-5 rounded-2xl mt-8 shadow-xl shadow-orange-500/20 transition-all active:scale-[0.98] flex items-center justify-center gap-3 group"
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 md:py-5 rounded-xl md:rounded-2xl mt-6 md:mt-8 shadow-xl shadow-orange-500/20 transition-all active:scale-[0.98] flex items-center justify-center gap-3 group"
             >
               <span>Secure Checkout</span>
               <Plus className="h-5 w-5 group-hover:rotate-90 transition-transform duration-300" />

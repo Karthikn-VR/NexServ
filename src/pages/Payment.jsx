@@ -95,14 +95,14 @@ export const Payment = () => {
   if (!address) {
     return (
       <div className="min-h-screen bg-[#0a0806] flex items-center justify-center px-4">
-        <div className="bg-white/[0.03] backdrop-blur-xl rounded-[32px] p-10 border border-white/10 text-center max-w-sm w-full shadow-2xl">
-          <div className="w-16 h-16 bg-orange-500/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-orange-500/20">
-            <ArrowLeft className="w-8 h-8 text-orange-500" />
+        <div className="bg-white/[0.03] backdrop-blur-xl rounded-2xl md:rounded-[32px] p-6 sm:p-10 border border-white/10 text-center max-w-sm w-full shadow-2xl">
+          <div className="w-12 h-12 md:w-16 md:h-16 bg-orange-500/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-orange-500/20">
+            <ArrowLeft className="w-6 h-6 md:w-8 md:h-8 text-orange-500" />
           </div>
-          <p className="text-gray-300 mb-8 font-medium">No checkout details found. Your session might have expired.</p>
+          <p className="text-gray-300 mb-8 font-medium text-sm md:text-base">No checkout details found. Your session might have expired.</p>
           <button
             onClick={() => navigate("/cart")}
-            className="w-full bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-2xl font-bold transition-all active:scale-95 shadow-lg shadow-orange-500/20"
+            className="w-full bg-orange-500 hover:bg-orange-600 text-white px-6 md:px-8 py-3.5 md:py-4 rounded-xl md:rounded-2xl font-bold transition-all active:scale-95 shadow-lg shadow-orange-500/20 text-sm md:text-base"
           >
             Back to Cart
           </button>
@@ -112,38 +112,38 @@ export const Payment = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0806] py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden text-white">
+    <div className="min-h-screen bg-[#0a0806] py-16 md:py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden text-white">
       {/* Background Blobs */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
         <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-orange-500/10 rounded-full blur-[120px] animate-pulse"></div>
         <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-orange-600/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '2s' }}></div>
       </div>
 
-      <div className="max-w-3xl mx-auto space-y-8">
+      <div className="max-w-3xl mx-auto space-y-6 md:space-y-8">
         <div className="flex items-center justify-between">
-          <h1 className="text-4xl font-black tracking-tight">Checkout</h1>
+          <h1 className="text-responsive-h2 font-black tracking-tight">Checkout</h1>
           <button 
             onClick={() => navigate('/cart')}
-            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors font-bold text-sm"
+            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors font-bold text-xs md:text-sm"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Cart
           </button>
         </div>
 
-        <div className="grid grid-cols-1 gap-8">
+        <div className="grid grid-cols-1 gap-6 md:gap-8">
           {/* Payment Method Section */}
-          <div className="bg-white/[0.03] backdrop-blur-xl rounded-[40px] border border-white/10 shadow-2xl p-8 sm:p-10">
-            <h2 className="text-xl font-black uppercase tracking-widest text-gray-400 mb-8">Payment Method</h2>
+          <div className="bg-white/[0.03] backdrop-blur-xl rounded-3xl md:rounded-[40px] border border-white/10 shadow-2xl p-6 sm:p-10">
+            <h2 className="text-sm md:text-xl font-black uppercase tracking-widest text-gray-400 mb-6 md:mb-8">Payment Method</h2>
             
-            <div className="flex flex-col md:flex-row gap-10 items-center">
-              <div className="relative group">
+            <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-center">
+              <div className="relative group w-full md:w-auto flex justify-center">
                 <div className="absolute -inset-4 bg-orange-500/20 rounded-[32px] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative bg-[#0d0a08] p-6 rounded-[32px] border border-white/10 shadow-inner group-hover:border-orange-500/30 transition-all duration-300">
+                <div className="relative bg-[#0d0a08] p-4 md:p-6 rounded-2xl md:rounded-[32px] border border-white/10 shadow-inner group-hover:border-orange-500/30 transition-all duration-300 w-fit">
                   <img
                     src="https://nexserv-mhpe.onrender.com/static/qr.jpeg"
                     alt="Payment QR"
-                    className="w-56 h-56 object-cover rounded-2xl"
+                    className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 object-cover rounded-xl md:rounded-2xl"
                   />
                   <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10 text-[10px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
                     Scan to Pay
@@ -151,30 +151,30 @@ export const Payment = () => {
                 </div>
               </div>
 
-              <div className="flex-1 space-y-6 w-full">
+              <div className="flex-1 space-y-4 md:space-y-6 w-full">
                 <div className="space-y-2">
-                  <label className="text-xs font-black uppercase tracking-widest text-gray-500 ml-1">
+                  <label className="text-[10px] md:text-xs font-black uppercase tracking-widest text-gray-500 ml-1">
                     Confirmation Code
                   </label>
                   <div className="relative">
-                    <CheckCircle2 className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+                    <CheckCircle2 className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 md:w-5 md:h-5 text-gray-500" />
                     <input
                       value={couponCode}
                       onChange={(e) => setCouponCode(e.target.value)}
                       placeholder="Enter 'PAID' to confirm"
-                      className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white/[0.04] border border-white/10 focus:border-orange-500/60 outline-none transition-all text-sm font-bold placeholder:text-gray-600"
+                      className="w-full pl-10 md:pl-12 pr-4 py-3.5 md:py-4 rounded-xl md:rounded-2xl bg-white/[0.04] border border-white/10 focus:border-orange-500/60 outline-none transition-all text-sm font-bold placeholder:text-gray-600"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-xs font-black uppercase tracking-widest text-gray-500 ml-1">
+                  <label className="text-[10px] md:text-xs font-black uppercase tracking-widest text-gray-500 ml-1">
                     Delivery Instructions
                   </label>
                   <textarea
                     value={deliveryInstructions}
                     onChange={(e) => setDeliveryInstructions(e.target.value)}
-                    className="w-full px-5 py-4 rounded-2xl bg-white/[0.04] border border-white/10 focus:border-orange-500/60 outline-none transition-all text-sm font-medium placeholder:text-gray-600 resize-none"
+                    className="w-full px-4 md:px-5 py-3.5 md:py-4 rounded-xl md:rounded-2xl bg-white/[0.04] border border-white/10 focus:border-orange-500/60 outline-none transition-all text-sm font-medium placeholder:text-gray-600 resize-none"
                     rows={3}
                     placeholder="Gate code, drop-off point, etc..."
                   />
@@ -184,47 +184,47 @@ export const Payment = () => {
           </div>
 
           {/* Order Summary Section */}
-          <div className="bg-white/[0.03] backdrop-blur-xl rounded-[40px] border border-white/10 shadow-2xl p-8 sm:p-10">
-            <h2 className="text-xl font-black uppercase tracking-widest text-gray-400 mb-8">Order Summary</h2>
+          <div className="bg-white/[0.03] backdrop-blur-xl rounded-3xl md:rounded-[40px] border border-white/10 shadow-2xl p-6 sm:p-10">
+            <h2 className="text-sm md:text-xl font-black uppercase tracking-widest text-gray-400 mb-6 md:mb-8">Order Summary</h2>
             
             <div className="space-y-4">
               <div className="flex justify-between items-center text-gray-400">
                 <span className="font-medium">Subtotal</span>
                 <span className="font-bold text-white">₹{currentSubtotal}</span>
               </div>
-              <div className="flex justify-between items-center text-gray-500 text-sm">
+              <div className="flex justify-between items-center text-gray-500 text-xs md:text-sm">
                 <span className="font-medium">GST Tax</span>
                 <span className="font-bold">₹{extraCharges.gst}</span>
               </div>
-              <div className="flex justify-between items-center text-gray-500 text-sm">
+              <div className="flex justify-between items-center text-gray-500 text-xs md:text-sm">
                 <span className="font-medium">Service Charge</span>
                 <span className="font-bold">₹{extraCharges.serviceCharge}</span>
               </div>
               
-              <div className="pt-6 mt-6 border-t border-white/10">
-                <div className="flex justify-between items-center">
+              <div className="pt-4 md:pt-6 mt-4 md:mt-6 border-t border-white/10">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                   <div>
-                    <span className="text-xs font-black uppercase tracking-widest text-gray-500 block mb-1">Total Payable</span>
-                    <span className="text-4xl font-black text-white">₹{payable}</span>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-gray-500 block mb-1">Total Payable</span>
+                    <span className="text-3xl md:text-4xl font-black text-white">₹{payable}</span>
                   </div>
-                  <div className="text-right">
-                    <span className="text-xs font-black uppercase tracking-widest text-orange-500 block mb-1">Status</span>
+                  <div className="text-left sm:text-right">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-orange-500 block mb-1">Status</span>
                     <span className="text-sm font-bold text-orange-500/80">Pending Payment</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="mt-10 space-y-4">
+            <div className="mt-8 md:mt-10 space-y-4">
               {error && (
-                <div className="p-4 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm font-bold flex items-center gap-3 animate-shake">
+                <div className="p-4 rounded-xl md:rounded-2xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm font-bold flex items-center gap-3 animate-shake">
                   <div className="w-1.5 h-1.5 rounded-full bg-red-500"></div>
                   {error}
                 </div>
               )}
 
               {paymentSuccess && (
-                <div className="p-4 rounded-2xl bg-green-500/10 border border-green-500/20 text-green-400 text-sm font-bold flex items-center gap-3 animate-pulse">
+                <div className="p-4 rounded-xl md:rounded-2xl bg-green-500/10 border border-green-500/20 text-green-400 text-sm font-bold flex items-center gap-3 animate-pulse">
                   <CheckCircle2 className="h-5 w-5" />
                   Payment confirmed! Redirecting to orders...
                 </div>
@@ -233,7 +233,7 @@ export const Payment = () => {
               <button
                 onClick={handleConfirmPayment}
                 disabled={loading || paymentSuccess}
-                className="w-full bg-orange-500 hover:bg-orange-600 disabled:opacity-50 text-white py-5 px-8 rounded-2xl font-black text-lg transition-all active:scale-[0.98] shadow-2xl shadow-orange-500/20 relative overflow-hidden group"
+                className="w-full bg-orange-500 hover:bg-orange-600 disabled:opacity-50 text-white py-4 md:py-5 px-6 md:px-8 rounded-xl md:rounded-2xl font-black text-base md:text-lg transition-all active:scale-[0.98] shadow-2xl shadow-orange-500/20 relative overflow-hidden group"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-shimmer"></div>
                 {loading ? (
