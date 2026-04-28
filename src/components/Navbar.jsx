@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Utensils, Menu, X } from "lucide-react";
+import { Utensils, Menu, X, ShoppingCart, ClipboardList, Store, User, LogOut } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
 import { useCart } from "../hooks/useCart";
 import { useState } from "react";
@@ -12,14 +12,15 @@ export const Navbar = () => {
 
   const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
-  const navItems = [
-    { path: "/menu", label: "Menu" },
+  const navLinks = [
+    { path: "/menu", label: "Menu", icon: Utensils },
     {
       path: "/cart",
-      label: cartCount > 0 ? `Cart (${cartCount})` : "Cart"
+      label: cartCount > 0 ? `Cart (${cartCount})` : "Cart",
+      icon: ShoppingCart
     },
-    { path: "/orders", label: "Orders" },
-    ...(isAdmin ? [{ path: "/vendor", label: "Vendor" }] : []),
+    { path: "/orders", label: "Orders", icon: ClipboardList },
+    ...(isAdmin ? [{ path: "/vendor", label: "Vendor", icon: Store }] : []),
   ];
 
   return (
@@ -49,7 +50,7 @@ export const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1">
-            {navItems.map((item) => (
+            {navLinks.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
@@ -71,33 +72,69 @@ export const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation Overlay */}
-      <div className={`md:hidden fixed inset-0 top-16 bg-[#0a0806] z-40 transition-transform duration-300 ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        <div className="flex flex-col p-4 space-y-3 h-full overflow-y-auto custom-scrollbar">
-          {navItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className={`px-5 py-4 rounded-2xl font-bold text-lg transition-all active:scale-95 ${location.pathname === item.path
-                ? "bg-orange-500 text-white shadow-xl shadow-orange-500/20"
-                : "text-gray-400 hover:text-white bg-white/5 border border-white/5"
-                }`}
-            >
-              {item.label}
-            </Link>
-          ))}
-          <div className="mt-auto pt-8 pb-24">
+      {/* Mobile Menu Overlay */}
+      <div
+        className={`fixed inset-0 z-50 transition-all duration-500 md:hidden ${isMobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          }`}
+      >
+        <div
+          className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+        <div
+          className={`fixed top-0 right-0 w-[75%] max-w-[280px] h-screen bg-[#0a0806] border-l border-white/10 shadow-2xl transition-transform duration-500 transform flex flex-col overflow-y-auto ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+            }`}
+        >
+          <div className="p-4 border-b border-white/5 flex items-center justify-between sticky top-0 bg-[#0a0806] z-10">
+            <span className="text-sm font-bold text-gray-400 uppercase tracking-widest">Menu</span>
             <button
-              onClick={() => {
-                logout();
-                setIsMobileMenuOpen(false);
-              }}
-              className="w-full px-5 py-4 rounded-2xl font-bold text-lg text-red-400 bg-red-500/10 border border-red-500/20 text-center transition-all active:scale-95"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="p-2 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-all"
             >
-              Logout
+              <X className="w-5 h-5" />
             </button>
           </div>
+
+          <div className="flex-grow py-4 px-2 space-y-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`flex items-center space-x-3 px-4 py-3.5 rounded-xl font-bold transition-all ${location.pathname === link.path
+                    ? "bg-orange-500 text-white shadow-lg shadow-orange-500/20"
+                    : "text-gray-400 hover:text-white hover:bg-white/5"
+                  }`}
+              >
+                <link.icon className={`w-5 h-5 ${location.pathname === link.path ? "text-white" : "text-orange-500"}`} />
+                <span className="text-sm">{link.label}</span>
+              </Link>
+            ))}
+          </div>
+
+          {user && (
+            <div className="p-4 border-t border-white/5 bg-white/[0.02] mt-auto">
+              <div className="flex items-center space-x-3 mb-4 px-2">
+                <div className="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center border border-orange-500/30">
+                  <User className="w-5 h-5 text-orange-500" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-bold text-white truncate">{user.name || user.email?.split('@')[0]}</p>
+                  <p className="text-[10px] text-gray-500 uppercase tracking-widest">{user.role}</p>
+                </div>
+              </div>
+              <button
+                onClick={() => {
+                  logout();
+                  setIsMobileMenuOpen(false);
+                }}
+                className="w-full flex items-center space-x-3 px-4 py-3.5 rounded-xl font-bold text-red-400 hover:text-red-300 hover:bg-red-500/10 transition-all"
+              >
+                <LogOut className="w-5 h-5" />
+                <span className="text-sm">Logout</span>
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </nav>

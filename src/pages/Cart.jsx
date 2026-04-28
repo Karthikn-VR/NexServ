@@ -158,27 +158,27 @@ export const Cart = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0806] text-white py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div className="min-h-screen bg-[#0a0806] text-white py-4 md:py-10 px-2 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* background blobs */}
-      <div className="pointer-events-none absolute -left-40 top-20 w-[500px] h-[500px] bg-orange-500/10 rounded-full blur-[140px]" />
-      <div className="pointer-events-none absolute -right-32 bottom-0 w-[500px] h-[500px] bg-green-500/5 rounded-full blur-[140px]" />
-      <div className="pointer-events-none absolute inset-0 opacity-[0.02] [background-image:radial-gradient(circle_at_1px_1px,white_1px,transparent_0)] [background-size:32px_32px]" />
+      <div className="pointer-events-none absolute -left-40 top-20 w-[400px] h-[400px] bg-orange-500/5 rounded-full blur-[120px]" />
+      <div className="pointer-events-none absolute -right-32 bottom-0 w-[400px] h-[400px] bg-green-500/5 rounded-full blur-[120px]" />
+      <div className="pointer-events-none absolute inset-0 opacity-[0.01] [background-image:radial-gradient(circle_at_1px_1px,white_1px,transparent_0)] [background-size:24px_24px]" />
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-10 relative z-10">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-3 md:gap-8 relative z-10">
         
         {/* Left Side: Beverages Add-ons */}
-        <div className="lg:col-span-3 order-2 lg:order-1 space-y-8">
-          <div className="bg-white/[0.03] backdrop-blur-xl rounded-2xl md:rounded-3xl p-6 md:p-8 border border-white/10 shadow-2xl">
-            <div className="flex items-center space-x-3 mb-6 md:mb-8">
-              <div className="w-8 h-8 bg-orange-500/20 rounded-lg flex items-center justify-center">
-                <Coffee className="h-4 w-4 text-orange-500" />
+        <div className="lg:col-span-3 order-2 lg:order-1 space-y-3 md:space-y-6">
+          <div className="bg-white/[0.02] backdrop-blur-xl rounded-xl md:rounded-2xl p-3 md:p-6 border border-white/10 shadow-xl">
+            <div className="flex items-center space-x-2 mb-3 md:mb-6">
+              <div className="w-7 h-7 bg-orange-500/20 rounded-md flex items-center justify-center">
+                <Coffee className="h-3.5 w-3.5 text-orange-500" />
               </div>
-              <h2 className="text-lg font-extrabold text-white tracking-tight">Beverages</h2>
+              <h2 className="text-sm md:text-base font-extrabold text-white tracking-tight">Add Beverages</h2>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 md:gap-6">
-              {addonItems.filter(i => i.category === 'Beverages').map(item => (
-                  <div key={item.id} className="group relative rounded-2xl overflow-hidden border border-white/5 hover:border-orange-500/30 transition-all duration-300 bg-white/5">
-                    <div className="h-24 md:h-28 w-full overflow-hidden">
+            <div className="grid grid-cols-1 gap-2">
+              {addonItems.filter(i => i.category === 'Beverages').slice(0, 3).map(item => (
+                  <div key={item.id} className="group relative flex flex-row items-center gap-2 p-1.5 rounded-lg border border-white/5 hover:border-orange-500/30 transition-all duration-300 bg-white/5 h-[60px]">
+                    <div className="h-10 w-10 rounded-md overflow-hidden flex-shrink-0">
                       <img 
                         src={item.image_url} 
                         alt={item.name} 
@@ -186,18 +186,49 @@ export const Cart = () => {
                         onError={handleImageError}
                       />
                     </div>
-                    <div className="p-4">
-                      <h3 className="text-sm font-bold text-white line-clamp-1 group-hover:text-orange-500 transition-colors">{item.name}</h3>
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between mt-3 gap-3">
-                        <span className="text-orange-500 font-black text-sm">₹{item.price}</span>
-                        <button 
-                          onClick={() => addToCart(item)}
-                          className="w-full sm:w-10 h-10 bg-orange-500 text-white rounded-xl hover:bg-orange-600 transition-all shadow-lg shadow-orange-500/20 flex items-center justify-center active:scale-90"
-                        >
-                          <Plus className="h-5 w-5" />
-                        </button>
-                      </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-[10px] md:text-xs font-bold text-white line-clamp-1 group-hover:text-orange-500 transition-colors">{item.name}</h3>
+                      <p className="text-orange-500 font-black text-[9px] md:text-xs mt-0">₹{item.price}</p>
                     </div>
+                    <button 
+                      onClick={() => addToCart(item)}
+                      className="w-7 h-7 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-all flex items-center justify-center active:scale-90"
+                    >
+                      <Plus className="h-3.5 w-3.5" />
+                    </button>
+                  </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-white/[0.02] backdrop-blur-xl rounded-xl md:rounded-2xl p-3 md:p-6 border border-white/10 shadow-xl">
+            <div className="flex items-center space-x-2 mb-3 md:mb-6">
+              <div className="w-7 h-7 bg-orange-500/20 rounded-md flex items-center justify-center">
+                <Cookie className="h-3.5 w-3.5 text-orange-500" />
+              </div>
+              <h2 className="text-sm md:text-base font-extrabold text-white tracking-tight">Add Snacks</h2>
+            </div>
+            <div className="grid grid-cols-1 gap-2">
+              {addonItems.filter(i => i.category === 'Snacks').slice(0, 3).map(item => (
+                  <div key={item.id} className="group relative flex flex-row items-center gap-2 p-1.5 rounded-lg border border-white/5 hover:border-orange-500/30 transition-all duration-300 bg-white/5 h-[60px]">
+                    <div className="h-10 w-10 rounded-md overflow-hidden flex-shrink-0">
+                      <img 
+                        src={item.image_url} 
+                        alt={item.name} 
+                        className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-500" 
+                        onError={handleImageError}
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-[10px] md:text-xs font-bold text-white line-clamp-1 group-hover:text-orange-500 transition-colors">{item.name}</h3>
+                      <p className="text-orange-500 font-black text-[9px] md:text-xs mt-0">₹{item.price}</p>
+                    </div>
+                    <button 
+                      onClick={() => addToCart(item)}
+                      className="w-7 h-7 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-all flex items-center justify-center active:scale-90"
+                    >
+                      <Plus className="h-3.5 w-3.5" />
+                    </button>
                   </div>
               ))}
             </div>
@@ -205,16 +236,16 @@ export const Cart = () => {
         </div>
 
         {/* Middle Side: Cart Content */}
-        <div className="lg:col-span-6 order-1 lg:order-2 space-y-6 md:space-y-8">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-2">
+        <div className="lg:col-span-6 order-1 lg:order-2 space-y-3 md:space-y-6">
+          <div className="flex flex-row items-end justify-between gap-3 mb-1">
             <div>
-              <p className="text-orange-500 font-medium tracking-wider uppercase text-[10px] md:text-xs mb-1">Your Order</p>
-              <h1 className="text-responsive-h2 font-black text-white tracking-tight">Review <span className="text-orange-500">Cart</span></h1>
+              <p className="text-orange-500 font-medium tracking-wider uppercase text-[8px] md:text-xs mb-0">Your Order</p>
+              <h1 className="text-lg md:text-3xl font-black text-white tracking-tight">Review <span className="text-orange-500">Cart</span></h1>
             </div>
-            <p className="text-gray-500 text-sm font-medium">{cartItems.length} items</p>
+            <p className="text-gray-500 text-[9px] md:text-sm font-medium">{cartItems.length} items</p>
           </div>
           
-          <div className="space-y-4">
+          <div className="space-y-1.5 md:space-y-3">
             {cartItems.map((item) => (
               <CartItem
                 key={item.id}
@@ -225,119 +256,92 @@ export const Cart = () => {
             ))}
           </div>
 
-          <div className="bg-white/[0.03] backdrop-blur-xl rounded-2xl md:rounded-3xl shadow-2xl p-6 md:p-8 space-y-6 md:space-y-8 border border-white/10">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-orange-500/20 rounded-xl flex items-center justify-center">
-                <ShoppingCart className="h-5 w-5 text-orange-500" />
+          <div className="bg-white/[0.02] backdrop-blur-xl rounded-xl md:rounded-2xl shadow-xl p-3 md:p-6 space-y-3 md:space-y-6 border border-white/10">
+            <div className="flex items-center space-x-2">
+              <div className="w-7 h-7 md:w-8 md:h-8 bg-orange-500/20 rounded-md flex items-center justify-center">
+                <ShoppingCart className="h-3.5 w-3.5 md:h-4 md:w-4 text-orange-500" />
               </div>
-              <h2 className="text-xl md:text-2xl font-black text-white tracking-tight">Delivery Details</h2>
+              <h2 className="text-base md:text-xl font-black text-white tracking-tight">Delivery Details</h2>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-              <div className="space-y-2">
-                <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest ml-1">Full name</label>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
+              <div className="space-y-0.5 md:space-y-1">
+                <label className="block text-[7px] md:text-[9px] font-bold text-gray-500 uppercase tracking-widest ml-0.5">Full name</label>
                 <input
                   value={address.full_name}
                   onChange={(e) => setAddress({ ...address, full_name: e.target.value })}
                   placeholder="John Doe"
-                  className="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-2xl focus:ring-2 focus:ring-orange-500/50 outline-none text-white placeholder-gray-600 transition-all"
+                  className="w-full px-3 py-2 md:px-4 md:py-3 bg-white/5 border border-white/10 rounded-lg md:rounded-xl focus:ring-1 focus:ring-orange-500/50 outline-none text-white placeholder-gray-600 transition-all text-[11px] md:text-sm"
                 />
               </div>
-              <div className="space-y-2">
-                <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest ml-1">Phone number</label>
+              <div className="space-y-0.5 md:space-y-1">
+                <label className="block text-[7px] md:text-[9px] font-bold text-gray-500 uppercase tracking-widest ml-0.5">Phone number</label>
                 <input
                   value={address.phone_number}
                   onChange={(e) => setAddress({ ...address, phone_number: e.target.value })}
-                  placeholder="+91 00000 00000"
-                  className="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-2xl focus:ring-2 focus:ring-orange-500/50 outline-none text-white placeholder-gray-600 transition-all"
-                />
-              </div>
-              <div className="md:col-span-2 space-y-2">
-                <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest ml-1">Address line 1</label>
-                <input
-                  value={address.address_line_1}
-                  onChange={(e) => setAddress({ ...address, address_line_1: e.target.value })}
-                  placeholder="Street name, Building name"
-                  className="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-2xl focus:ring-2 focus:ring-orange-500/50 outline-none text-white placeholder-gray-600 transition-all"
-                />
-              </div>
-              <div className="md:col-span-2 space-y-2">
-                <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest ml-1">Address line 2 (optional)</label>
-                <input
-                  value={address.address_line_2}
-                  onChange={(e) => setAddress({ ...address, address_line_2: e.target.value })}
-                  placeholder="Apartment, suite, unit, etc."
-                  className="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-2xl focus:ring-2 focus:ring-orange-500/50 outline-none text-white placeholder-gray-600 transition-all"
-                />
-              </div>
-              <div className="space-y-2">
-                <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest ml-1">City</label>
-                <input
-                  value={address.city}
-                  onChange={(e) => setAddress({ ...address, city: e.target.value })}
-                  placeholder="City"
-                  className="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-2xl focus:ring-2 focus:ring-orange-500/50 outline-none text-white placeholder-gray-600 transition-all"
-                />
-              </div>
-              <div className="space-y-2">
-                <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest ml-1">Postal Code</label>
-                <input
-                  value={address.postal_code}
-                  onChange={(e) => setAddress({ ...address, postal_code: e.target.value })}
-                  placeholder="000 000"
-                  className="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-2xl focus:ring-2 focus:ring-orange-500/50 outline-none text-white placeholder-gray-600 transition-all"
+                  placeholder="+91 98765 43210"
+                  className="w-full px-3 py-2 md:px-4 md:py-3 bg-white/5 border border-white/10 rounded-lg md:rounded-xl focus:ring-1 focus:ring-orange-500/50 outline-none text-white placeholder-gray-600 transition-all text-[11px] md:text-sm"
                 />
               </div>
             </div>
 
-            <div className="space-y-2 pt-4">
-              <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest ml-1">Cooking Instructions</label>
+            <div className="space-y-0.5 md:space-y-1">
+              <label className="block text-[7px] md:text-[9px] font-bold text-gray-500 uppercase tracking-widest ml-0.5">City</label>
+              <input
+                value={address.city}
+                onChange={(e) => setAddress({ ...address, city: e.target.value })}
+                placeholder="Enter your city"
+                className="w-full px-3 py-2 md:px-4 md:py-3 bg-white/5 border border-white/10 rounded-lg md:rounded-xl focus:ring-1 focus:ring-orange-500/50 outline-none text-white placeholder-gray-600 transition-all text-[11px] md:text-sm"
+              />
+            </div>
+
+            <div className="space-y-0.5 md:space-y-1">
+              <label className="block text-[7px] md:text-[9px] font-bold text-gray-500 uppercase tracking-widest ml-0.5">Cooking Instructions</label>
               <textarea
                 value={cookingInstructions}
                 onChange={(e) => setCookingInstructions(e.target.value)}
-                placeholder="Any special requests? (e.g., make it extra spicy)"
-                rows={3}
-                className="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-2xl focus:ring-2 focus:ring-orange-500/50 outline-none text-white placeholder-gray-600 transition-all resize-none"
+                placeholder="Any special requests?"
+                className="w-full px-3 py-2 md:px-4 md:py-3 bg-white/5 border border-white/10 rounded-lg md:rounded-xl focus:ring-1 focus:ring-orange-500/50 outline-none text-white placeholder-gray-600 transition-all resize-none h-14 md:h-20 text-[11px] md:text-sm"
               />
             </div>
           </div>
         </div>
 
         {/* Right Side: Order Summary */}
-        <div className="lg:col-span-3 order-3">
-          <div className="bg-white/[0.03] backdrop-blur-xl rounded-2xl md:rounded-3xl p-6 md:p-8 border border-white/10 shadow-2xl lg:sticky lg:top-32">
-            <h2 className="text-lg md:text-xl font-extrabold text-white mb-6 md:mb-8 tracking-tight">Order Summary</h2>
-            <div className="space-y-4 text-sm">
+        <div className="lg:col-span-3 order-3 space-y-3 md:space-y-6">
+          <div className="bg-white/[0.02] backdrop-blur-xl rounded-xl md:rounded-2xl p-4 md:p-6 border border-white/10 shadow-xl lg:sticky lg:top-24">
+            <h2 className="text-base md:text-lg font-extrabold text-white mb-4 md:mb-6 tracking-tight">Order Summary</h2>
+            <div className="space-y-2 md:space-y-3 text-[11px] md:text-sm">
               <div className="flex justify-between text-gray-400">
                 <span>Subtotal</span>
                 <span className="text-white font-bold">₹{subtotal}</span>
               </div>
               <div className="flex justify-between text-gray-400">
-                <span>Extra Charges</span>
+                <span>Charges</span>
                 <span className="text-white font-bold">₹{extraCharges.total}</span>
               </div>
-              <div className="pt-4 md:pt-6 mt-4 md:mt-6 border-t border-white/10 flex justify-between items-center">
-                <span className="text-base font-bold text-white">Total</span>
-                <span className="text-xl md:text-2xl font-black text-orange-500">₹{total}</span>
+              <div className="pt-3 md:pt-4 mt-3 md:mt-4 border-t border-white/10 flex justify-between items-center">
+                <span className="text-sm font-bold text-white">Total</span>
+                <span className="text-lg md:text-xl font-black text-orange-500">₹{total}</span>
               </div>
             </div>
 
             {error && (
-              <div className="mt-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-xs leading-relaxed">
+              <div className="mt-4 p-2.5 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-[10px] leading-relaxed">
                 {error}
               </div>
             )}
 
             <button
               onClick={handleCheckout}
-              className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 md:py-5 rounded-xl md:rounded-2xl mt-6 md:mt-8 shadow-xl shadow-orange-500/20 transition-all active:scale-[0.98] flex items-center justify-center gap-3 group"
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 md:py-4 rounded-lg md:rounded-xl mt-4 md:mt-6 shadow-lg shadow-orange-500/20 transition-all active:scale-[0.98] flex items-center justify-center gap-2 group"
             >
-              <span>Secure Checkout</span>
-              <Plus className="h-5 w-5 group-hover:rotate-90 transition-transform duration-300" />
+              <span className="text-sm md:text-base">Checkout</span>
+              <Plus className="h-4 w-4 group-hover:rotate-90 transition-transform duration-300" />
             </button>
             
-            <p className="text-[10px] text-gray-500 text-center mt-6 uppercase tracking-widest">
-              Secure payments powered by nexServ
+            <p className="text-[8px] text-gray-500 text-center mt-4 uppercase tracking-widest">
+              NexServe Secure Payment
             </p>
           </div>
         </div>

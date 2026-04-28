@@ -114,7 +114,7 @@ export const VendorDashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0806] py-20 md:py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden text-white">
+    <div className="min-h-screen bg-[#0a0806] pt-12 pb-4 md:py-20 px-2 sm:px-6 lg:px-8 relative overflow-hidden text-white">
       {/* Background Blobs */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
         <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-orange-500/10 rounded-full blur-[120px] animate-pulse"></div>
@@ -122,15 +122,15 @@ export const VendorDashboard = () => {
       </div>
 
       <div className="max-w-4xl mx-auto relative z-10">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-8 md:mb-12 gap-6 md:gap-8">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-2 md:mb-10 gap-2 md:gap-8">
           <div>
-            <p className="text-orange-500 font-black uppercase tracking-widest text-[10px] md:text-sm mb-2 md:mb-3">Management Console</p>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight">Vendor <span className="text-orange-500">Dashboard</span></h1>
-            <p className="text-gray-400 mt-2 md:mt-4 text-base md:text-lg font-medium">Manage and track your customer orders in real-time.</p>
+            <p className="text-orange-500 font-black uppercase tracking-widest text-[6px] md:text-xs mb-0 md:mb-2">Management Console</p>
+            <h1 className="text-sm md:text-3xl lg:text-4xl font-black tracking-tight">Vendor <span className="text-orange-500">Dashboard</span></h1>
+            <p className="text-gray-400 mt-0 md:mt-2 text-[7px] md:text-base font-medium">Manage and track customer orders in real-time.</p>
           </div>
           
           {/* Filter Tabs */}
-          <div className="flex flex-wrap sm:flex-nowrap bg-white/[0.03] backdrop-blur-xl p-1 md:p-1.5 rounded-xl md:rounded-2xl border border-white/10 shadow-2xl min-w-0">
+          <div className="flex flex-wrap sm:flex-nowrap bg-white/[0.03] backdrop-blur-xl p-0.5 rounded-md md:rounded-xl border border-white/10 shadow-2xl min-w-0">
             {[
               { id: "ALL", label: "All" },
               { id: "NEW", label: "New" },
@@ -141,7 +141,7 @@ export const VendorDashboard = () => {
               <button
                 key={tab.id}
                 onClick={() => setStatusFilter(tab.id)}
-                className={`flex-1 sm:flex-none px-3 sm:px-5 py-2 sm:py-2.5 text-[10px] sm:text-xs font-black uppercase tracking-widest rounded-lg md:rounded-xl transition-all duration-300 ${
+                className={`flex-1 sm:flex-none px-1.5 sm:px-4 py-1 sm:py-2 text-[6px] sm:text-[10px] font-black uppercase tracking-widest rounded-sm md:rounded-lg transition-all duration-300 ${
                   statusFilter === tab.id
                     ? "bg-orange-500 text-white shadow-lg shadow-orange-500/25 scale-105"
                     : "text-gray-500 hover:text-gray-300"
@@ -154,20 +154,20 @@ export const VendorDashboard = () => {
         </div>
 
         {error && (
-          <div className="bg-red-500/10 border border-red-500/20 p-4 sm:p-6 rounded-2xl sm:rounded-[32px] mb-8 md:mb-12 flex items-center gap-4">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-red-500/20 rounded-xl sm:rounded-2xl flex items-center justify-center border border-red-500/30 flex-shrink-0">
-              <svg className="h-5 w-5 sm:h-6 sm:w-6 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+          <div className="bg-red-500/10 border border-red-500/20 p-3 sm:p-6 rounded-xl sm:rounded-[32px] mb-6 md:mb-12 flex items-center gap-3">
+            <div className="w-8 h-8 sm:w-12 sm:h-12 bg-red-500/20 rounded-lg sm:rounded-2xl flex items-center justify-center border border-red-500/30 flex-shrink-0">
+              <svg className="h-4 w-4 sm:h-6 sm:w-6 text-red-500" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
               </svg>
             </div>
             <div>
-              <p className="text-xs sm:text-sm font-bold text-red-400">Connection Error</p>
-              <p className="text-[10px] sm:text-xs text-red-400/80 mt-0.5">{error}</p>
+              <p className="text-[10px] sm:text-sm font-bold text-red-400">Connection Error</p>
+              <p className="text-[8px] sm:text-xs text-red-400/80 mt-0.5">{error}</p>
             </div>
           </div>
         )}
 
-        <div className="space-y-6 md:space-y-8">
+        <div className="space-y-3 md:space-y-8">
           {sortedOrders.length > 0 ? (
             sortedOrders.map((order) => (
               <OrderCard

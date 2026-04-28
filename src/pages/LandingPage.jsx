@@ -199,12 +199,12 @@ export const LandingPage = () => {
     >
       {/* ============ NAV ============ */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0a0806]/80 backdrop-blur-xl border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 h-16 md:h-20 flex items-center justify-between">
           <Link to="/" data-testid="brand-logo" className="flex items-center space-x-2 shrink-0">
-            <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/30">
-              <Utensils className="text-white w-4 h-4 md:w-5 md:h-5" />
+            <div className="w-7 h-7 md:w-10 md:h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg md:rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/30">
+              <Utensils className="text-white w-3.5 h-3.5 md:w-5 md:h-5" />
             </div>
-            <span className="text-xl md:text-2xl font-extrabold tracking-tight">
+            <span className="text-lg md:text-2xl font-extrabold tracking-tight">
               <span className="text-orange-500">Nex</span>Serv
             </span>
           </Link>
@@ -233,7 +233,7 @@ export const LandingPage = () => {
             ))}
           </div>
 
-          <div className="flex items-center space-x-2 md:space-x-4">
+          <div className="flex items-center space-x-1.5 md:space-x-4">
             <div className="hidden sm:flex items-center bg-white/5 border border-white/10 rounded-full px-4 py-2 w-32 md:w-56">
               <Search className="w-4 h-4 text-gray-400 shrink-0" />
               <input
@@ -242,21 +242,21 @@ export const LandingPage = () => {
                 data-testid="nav-search-input"
               />
             </div>
-            <button className="relative p-2 text-gray-300 hover:text-white shrink-0" data-testid="nav-cart-btn">
-              <ShoppingBag className="w-5 h-5" />
-              <span className="absolute top-1 right-1 w-2 h-2 bg-orange-500 rounded-full" />
+            <button className="relative p-1.5 md:p-2 text-gray-300 hover:text-white shrink-0" data-testid="nav-cart-btn">
+              <ShoppingBag className="w-4 h-4 md:w-5 md:h-5" />
+              <span className="absolute top-1 right-1 w-1.5 h-1.5 bg-orange-500 rounded-full" />
             </button>
             <Link
               to="/login"
               data-testid="nav-login-btn"
-              className="hidden sm:inline-flex px-4 md:px-5 py-2 rounded-full text-xs md:text-sm font-semibold text-white border border-white/15 hover:bg-white/10 transition-all"
+              className="hidden xs:inline-flex px-3 md:px-5 py-1.5 md:py-2 rounded-full text-[10px] md:text-sm font-semibold text-white border border-white/15 hover:bg-white/10 transition-all"
             >
               Login
             </Link>
             <Link
               to="/login"
               data-testid="nav-signup-btn"
-              className="px-4 md:px-5 py-2 rounded-full bg-orange-500 hover:bg-orange-600 text-white text-xs md:text-sm font-semibold shadow-lg shadow-orange-500/30 transition-all"
+              className="px-3 md:px-5 py-1.5 md:py-2 rounded-full bg-orange-500 hover:bg-orange-600 text-white text-[10px] md:text-sm font-semibold shadow-lg shadow-orange-500/30 transition-all"
             >
               Sign Up
             </Link>
@@ -267,37 +267,37 @@ export const LandingPage = () => {
       {/* ============ HERO (image #1 inspired) ============ */}
       <section
         id="home"
-        className="relative pt-24 md:pt-32 pb-12 md:pb-24 px-4 md:px-6 max-w-7xl mx-auto min-h-screen flex items-center"
+        className="relative pt-16 md:pt-32 pb-4 md:pb-16 px-3 md:px-6 max-w-7xl mx-auto min-h-[60vh] md:min-h-screen flex items-center"
       >
         {/* decorative leaves */}
-        <div className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 text-green-500/30 opacity-50 md:opacity-100">
-          <svg width="80" height="80" md:width="120" md:height="120" viewBox="0 0 100 100" fill="currentColor">
+        <div className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 text-green-500/30 opacity-40 md:opacity-100">
+          <svg width="40" height="40" md:width="120" md:height="120" viewBox="0 0 100 100" fill="currentColor">
             <path d="M50 10 C 30 30 30 60 50 80 C 70 60 70 30 50 10 Z" />
           </svg>
         </div>
-        <div className="absolute -left-20 bottom-10 w-48 md:w-72 h-48 md:h-72 bg-green-500/10 rounded-full blur-[80px] md:blur-[120px]" />
-        <div className="absolute right-0 top-1/3 w-64 md:w-96 h-64 md:h-96 bg-orange-500/10 rounded-full blur-[100px] md:blur-[140px]" />
+        <div className="absolute -left-10 bottom-10 w-32 md:w-72 h-32 md:h-72 bg-green-500/10 rounded-full blur-[40px] md:blur-[120px]" />
+        <div className="absolute right-0 top-1/4 w-48 md:w-96 h-48 md:h-96 bg-orange-500/10 rounded-full blur-[60px] md:blur-[140px]" />
 
-        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center w-full relative z-10">
+        <div className="grid lg:grid-cols-2 gap-4 md:gap-12 items-center w-full relative z-10">
           {/* LEFT */}
-          <div className="space-y-6 md:space-y-8 text-center lg:text-left">
-            <div className="flex flex-col gap-2 items-center lg:items-start">
+          <div className="space-y-3 md:space-y-8 text-center lg:text-left">
+            <div className="flex flex-col gap-1 md:gap-2 items-center lg:items-start">
               {/* socials column */}
-              <div className="flex items-center gap-4 text-gray-500 text-xs">
-                <Facebook className="w-4 h-4 hover:text-orange-500 cursor-pointer" />
-                <Twitter className="w-4 h-4 hover:text-orange-500 cursor-pointer" />
-                <Instagram className="w-4 h-4 hover:text-orange-500 cursor-pointer" />
-                <span className="h-px w-10 bg-white/10" />
+              <div className="flex items-center gap-3 text-gray-500 text-[8px] md:text-[10px]">
+                <Facebook className="w-3 h-3 md:w-3.5 md:h-3.5 hover:text-orange-500 cursor-pointer" />
+                <Twitter className="w-3 h-3 md:w-3.5 md:h-3.5 hover:text-orange-500 cursor-pointer" />
+                <Instagram className="w-3 h-3 md:w-3.5 md:h-3.5 hover:text-orange-500 cursor-pointer" />
+                <span className="h-px w-6 md:w-8 bg-white/10" />
               </div>
               <p
-                className="text-orange-400 text-xl md:text-2xl mt-2"
+                className="text-orange-400 text-base md:text-2xl mt-1"
                 style={{ fontFamily: "'Caveat', 'Brush Script MT', cursive" }}
                 data-testid="hero-eyebrow"
               >
                 Its Quick &amp; Amusing!
               </p>
               <h1
-                className="text-responsive-h1 font-extrabold leading-[1.1] tracking-tight"
+                className="text-3xl md:text-responsive-h1 font-extrabold leading-[1.1] tracking-tight"
                 data-testid="hero-title"
                 style={{ fontFamily: "'Fraunces', Georgia, serif" }}
               >
@@ -305,34 +305,34 @@ export const LandingPage = () => {
                 <br />
                 Quality in <span className="italic font-light">No Time</span>
               </h1>
-              <p className="text-gray-400 text-sm md:text-base max-w-md leading-relaxed mt-4 mx-auto lg:mx-0">
+              <p className="text-gray-400 text-[10px] md:text-base max-w-xs md:max-w-md leading-relaxed mt-1.5 md:mt-4 mx-auto lg:mx-0">
                 {HERO_DISH.description}
               </p>
             </div>
 
-            <div className="flex items-center justify-center lg:justify-start gap-4">
+            <div className="flex items-center justify-center lg:justify-start gap-2.5 md:gap-4">
               <a
                 href="#menu"
                 data-testid="hero-cta-see-menu"
-                className="px-6 md:px-8 py-3 md:py-3.5 bg-orange-500 hover:bg-orange-600 rounded-full font-semibold text-white shadow-xl shadow-orange-500/30 transition-all inline-flex items-center gap-2 group text-sm md:text-base"
+                className="px-4 md:px-8 py-2 md:py-3.5 bg-orange-500 hover:bg-orange-600 rounded-full font-semibold text-white shadow-xl shadow-orange-500/30 transition-all inline-flex items-center gap-1.5 group text-[11px] md:text-base"
               >
                 See Menu
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-3 h-3 md:w-3.5 md:h-3.5 group-hover:translate-x-1 transition-transform" />
               </a>
               <a
                 href="#cuisine"
-                className="px-6 md:px-8 py-3 md:py-3.5 rounded-full border border-white/15 hover:bg-white/5 font-semibold text-xs md:text-sm transition-all"
+                className="px-4 md:px-8 py-2 md:py-3.5 rounded-full border border-white/15 hover:bg-white/5 font-semibold text-[10px] md:text-sm transition-all"
               >
                 Explore
               </a>
             </div>
 
-            <div className="flex items-center justify-center lg:justify-start space-x-4 pt-2">
-              <div className="flex -space-x-3">
+            <div className="flex items-center justify-center lg:justify-start space-x-2 pt-1">
+              <div className="flex -space-x-2">
                 {[1, 2, 3, 4].map((i) => (
                   <div
                     key={i}
-                    className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-[#0a0806] overflow-hidden"
+                    className="w-6 h-6 md:w-10 md:h-10 rounded-full border-2 border-[#0a0806] overflow-hidden"
                   >
                     <img
                       src={`https://i.pravatar.cc/100?u=${i}`}
@@ -343,21 +343,21 @@ export const LandingPage = () => {
                 ))}
               </div>
               <div className="text-left">
-                <div className="flex items-center gap-1 text-orange-500">
+                <div className="flex items-center gap-0.5 text-orange-500">
                   {[1, 2, 3, 4, 5].map((i) => (
-                    <Star key={i} className="w-2.5 h-2.5 md:w-3 md:h-3 fill-current" />
+                    <Star key={i} className="w-2 md:w-3 h-2 md:h-3 fill-current" />
                   ))}
                 </div>
-                <p className="text-[10px] md:text-xs text-gray-400 font-medium">10k+ happy customers</p>
+                <p className="text-[8px] md:text-xs text-gray-400 font-medium">10k+ happy customers</p>
               </div>
             </div>
           </div>
 
           {/* RIGHT — plate w/ leaves */}
-          <div className="relative flex items-center justify-center mt-8 lg:mt-0">
+          <div className="relative flex items-center justify-center mt-6 lg:mt-0">
             {/* big leaf behind */}
             <svg
-              className="absolute -right-5 md:-right-10 top-0 w-[300px] h-[300px] md:w-[520px] md:h-[520px] text-green-600/70 -z-0"
+              className="absolute -right-3 md:-right-10 top-0 w-[240px] h-[240px] md:w-[520px] md:h-[520px] text-green-600/70 -z-0"
               viewBox="0 0 200 200"
               fill="currentColor"
             >
@@ -370,33 +370,33 @@ export const LandingPage = () => {
               />
             </svg>
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-[280px] h-[280px] md:w-[460px] md:h-[460px] rounded-full border border-orange-400/30" />
+              <div className="w-[220px] h-[220px] md:w-[460px] md:h-[460px] rounded-full border border-orange-400/30" />
             </div>
 
             <div className="relative animate-float-slow z-10">
-              <div className="absolute inset-0 rounded-full bg-orange-500/20 blur-3xl scale-90 -z-10" />
+              <div className="absolute inset-0 rounded-full bg-orange-500/20 blur-2xl scale-90 -z-10" />
               <img
                 src={HERO_DISH.strMealThumb}
                 alt={HERO_DISH.strMeal}
                 data-testid="hero-dish-image"
-                className="w-full max-w-[250px] md:max-w-[420px] max-h-[250px] md:max-h-[400px] object-cover rounded-full shadow-[0_30px_80px_-20px_rgba(0,0,0,0.9)] border-[4px] md:border-[6px] border-white/[0.04]"
+                className="w-full max-w-[200px] md:max-w-[420px] max-h-[200px] md:max-h-[400px] object-cover rounded-full shadow-[0_20px_60px_-15px_rgba(0,0,0,0.9)] border-[3px] md:border-[6px] border-white/[0.04]"
               />
               {/* orbit floats */}
-              <div className="absolute -top-4 left-2 w-12 h-12 md:w-20 md:h-20 rounded-full bg-[#1a1410]/80 backdrop-blur-md p-1.5 md:p-2 border border-white/10 shadow-xl animate-bounce-slow">
+              <div className="absolute -top-3 left-1 w-8 h-8 md:w-20 md:h-20 rounded-full bg-[#1a1410]/80 backdrop-blur-md p-1 md:p-2 border border-white/10 shadow-xl animate-bounce-slow">
                 <img
                   src="https://www.themealdb.com/images/ingredients/Lime.png"
                   alt="lime"
                   className="w-full h-full object-contain"
                 />
               </div>
-              <div className="absolute top-1/3 -right-2 md:-right-4 w-10 h-10 md:w-16 md:h-16 rounded-full bg-[#1a1410]/80 backdrop-blur-md p-1.5 md:p-2 border border-white/10 shadow-xl animate-float-slow">
+              <div className="absolute top-1/3 -right-1 md:-right-4 w-7 h-7 md:w-16 md:h-16 rounded-full bg-[#1a1410]/80 backdrop-blur-md p-1 md:p-2 border border-white/10 shadow-xl animate-float-slow">
                 <img
                   src="https://www.themealdb.com/images/ingredients/Chilli.png"
                   alt="chilli"
                   className="w-full h-full object-contain"
                 />
               </div>
-              <div className="absolute -bottom-2 right-6 md:right-10 w-12 h-12 md:w-20 md:h-20 rounded-full bg-[#1a1410]/80 backdrop-blur-md p-1.5 md:p-2 border border-white/10 shadow-xl animate-bounce-slow">
+              <div className="absolute -bottom-1 right-4 md:right-10 w-8 h-8 md:w-20 md:h-20 rounded-full bg-[#1a1410]/80 backdrop-blur-md p-1 md:p-2 border border-white/10 shadow-xl animate-bounce-slow">
                 <img
                   src="https://www.themealdb.com/images/ingredients/Garlic.png"
                   alt="garlic"
@@ -409,17 +409,17 @@ export const LandingPage = () => {
       </section>
 
       {/* ============ BEST FOOD CAROUSEL (image #2) ============ */}
-      <section className="relative py-16 md:py-24 px-4 md:px-6 bg-[#070504] overflow-hidden">
-        <div className="max-w-6xl mx-auto text-center mb-12 md:mb-16">
+      <section className="relative py-12 md:py-24 px-4 md:px-6 bg-[#070504] overflow-hidden">
+        <div className="max-w-6xl mx-auto text-center mb-8 md:mb-16">
           <h2
-            className="text-responsive-h2 font-extrabold tracking-tight"
+            className="text-2xl md:text-responsive-h2 font-extrabold tracking-tight"
             style={{ fontFamily: "'Fraunces', Georgia, serif" }}
             data-testid="best-food-title"
           >
             Provide the <span className="text-orange-500">best food</span> for you
           </h2>
-          <div className="w-16 md:w-24 h-1 bg-orange-500 mx-auto mt-4 md:mt-6 rounded-full" />
-          <p className="text-gray-400 max-w-xl mx-auto mt-4 md:mt-6 text-xs md:text-sm leading-relaxed">
+          <div className="w-12 md:w-24 h-1 bg-orange-500 mx-auto mt-3 md:mt-6 rounded-full" />
+          <p className="text-gray-400 max-w-sm md:max-w-xl mx-auto mt-3 md:mt-6 text-[10px] md:text-sm leading-relaxed">
             We provide the best and most delicious food based on high quality
             ingredients that are maintained by high tech machines and cooked by our experts.
           </p>

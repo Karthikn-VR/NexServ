@@ -50,35 +50,35 @@ export const Orders = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0806] py-16 md:py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div className="min-h-screen bg-[#0a0806] pt-12 pb-6 md:py-20 px-3 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Background Blobs */}
       <div className="pointer-events-none absolute -left-40 top-20 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-orange-500/15 rounded-full blur-[80px] md:blur-[140px]" />
       <div className="pointer-events-none absolute -right-32 bottom-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-green-500/10 rounded-full blur-[80px] md:blur-[140px]" />
       <div className="pointer-events-none absolute inset-0 opacity-[0.03] [background-image:radial-gradient(circle_at_1px_1px,white_1px,transparent_0)] [background-size:32px_32px]" />
 
       <div className="max-w-4xl mx-auto relative z-10">
-        <div className="mb-8 md:mb-12">
-          <p className="text-orange-500 font-medium tracking-widest uppercase text-[10px] md:text-xs mb-2 md:mb-3">Order History</p>
-          <h1 className="text-responsive-h2 font-extrabold text-white tracking-tight">Your <span className="text-orange-500">Orders</span></h1>
+        <div className="mb-2 md:mb-10">
+          <p className="text-orange-500 font-black tracking-widest uppercase text-[6px] md:text-xs mb-0 md:mb-2">Order History</p>
+          <h1 className="text-sm md:text-3xl font-extrabold text-white tracking-tight">Your <span className="text-orange-500">Orders</span></h1>
         </div>
 
         {error && (
-          <div className="p-4 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm mb-8 flex items-center gap-3">
-            <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+          <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-xs mb-6 flex items-center gap-2">
+            <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
             {error}
           </div>
         )}
 
         {orders.length === 0 ? (
-          <div className="text-center py-24 bg-white/[0.02] border border-white/10 rounded-3xl backdrop-blur-xl">
-            <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6">
-              <div className="w-10 h-10 border-2 border-dashed border-gray-600 rounded-lg rotate-12" />
+          <div className="text-center py-16 bg-white/[0.02] border border-white/10 rounded-2xl backdrop-blur-xl">
+            <div className="w-14 h-14 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-8 h-8 border-2 border-dashed border-gray-600 rounded-lg rotate-12" />
             </div>
-            <p className="text-gray-400 text-lg font-medium">No orders found yet</p>
-            <p className="text-gray-600 text-sm mt-2">Time to place your first order!</p>
+            <p className="text-gray-400 text-base font-medium">No orders found yet</p>
+            <p className="text-gray-600 text-xs mt-1">Time to place your first order!</p>
           </div>
         ) : (
-          <div className="space-y-8">
+          <div className="space-y-3 md:space-y-8">
             {orders.map((order) => (
               <OrderCard key={order.id} order={order} />
             ))}

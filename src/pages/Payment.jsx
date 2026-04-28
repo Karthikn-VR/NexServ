@@ -112,71 +112,71 @@ export const Payment = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0806] py-16 md:py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden text-white">
+    <div className="min-h-screen bg-[#0a0806] py-3 md:py-24 px-2 sm:px-6 lg:px-8 relative overflow-hidden text-white">
       {/* Background Blobs */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
         <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-orange-500/10 rounded-full blur-[120px] animate-pulse"></div>
         <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-orange-600/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '2s' }}></div>
       </div>
 
-      <div className="max-w-3xl mx-auto space-y-6 md:space-y-10">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <h1 className="text-responsive-h2 font-black tracking-tight">Checkout</h1>
+      <div className="max-w-3xl mx-auto space-y-2 md:space-y-10">
+        <div className="flex flex-row items-center justify-between gap-4 mb-1 md:mb-0">
+          <h1 className="text-base md:text-5xl font-black tracking-tight">Checkout</h1>
           <button 
             onClick={() => navigate('/cart')}
-            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors font-bold text-xs md:text-sm w-fit"
+            className="flex items-center gap-1 text-gray-400 hover:text-white transition-colors font-bold text-[7px] md:text-sm w-fit bg-white/5 px-2 py-0.5 rounded-md border border-white/10"
           >
-            <ArrowLeft className="w-4 h-4" />
-            Back to Cart
+            <ArrowLeft className="w-2 h-2" />
+            Back
           </button>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 md:gap-10">
+        <div className="grid grid-cols-1 gap-2 md:gap-10">
           {/* Payment Method Section */}
-          <div className="bg-white/[0.03] backdrop-blur-xl rounded-2xl md:rounded-[40px] border border-white/10 shadow-2xl p-5 sm:p-8 md:p-10">
-            <h2 className="text-xs md:text-xl font-black uppercase tracking-widest text-gray-400 mb-6 md:mb-10">Payment Method</h2>
+          <div className="bg-white/[0.03] backdrop-blur-xl rounded-lg md:rounded-[40px] border border-white/10 shadow-2xl p-2 sm:p-8 md:p-10">
+            <h2 className="text-[6px] md:text-xl font-black uppercase tracking-widest text-gray-400 mb-1.5 md:mb-10">Payment Method</h2>
             
-            <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center lg:items-start">
+            <div className="flex flex-col lg:flex-row gap-2 lg:gap-12 items-center lg:items-start">
               <div className="relative group w-full sm:w-auto flex justify-center">
                 <div className="absolute -inset-4 bg-orange-500/20 rounded-[32px] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative bg-[#0d0a08] p-4 md:p-6 rounded-2xl md:rounded-[32px] border border-white/10 shadow-inner group-hover:border-orange-500/30 transition-all duration-300 w-fit">
+                <div className="relative bg-[#0d0a08] p-1.5 md:p-6 rounded-md md:rounded-[32px] border border-white/10 shadow-inner group-hover:border-orange-500/30 transition-all duration-300 w-fit">
                   <img
                     src="https://nexserv-mhpe.onrender.com/static/qr.jpeg"
                     alt="Payment QR"
-                    className="w-44 h-44 sm:w-56 sm:h-56 md:w-64 md:h-64 object-cover rounded-xl md:rounded-2xl"
+                    className="w-20 h-20 sm:w-56 sm:h-56 md:w-64 md:h-64 object-cover rounded-sm md:rounded-2xl"
                   />
-                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10 text-[10px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
-                    Scan to Pay
+                  <div className="absolute bottom-1 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur-md px-1.5 py-0.5 rounded-full border border-white/10 text-[5px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
+                    Scan
                   </div>
                 </div>
               </div>
 
-              <div className="flex-1 space-y-5 md:space-y-8 w-full">
-                <div className="space-y-2.5">
-                  <label className="text-[10px] md:text-xs font-black uppercase tracking-widest text-gray-500 ml-1">
+              <div className="flex-1 space-y-2 md:space-y-8 w-full">
+                <div className="space-y-0.5 md:space-y-1">
+                  <label className="text-[6px] md:text-xs font-black uppercase tracking-widest text-gray-500 ml-1">
                     Confirmation Code
                   </label>
                   <div className="relative">
-                    <CheckCircle2 className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 md:w-5 md:h-5 text-gray-500" />
+                    <CheckCircle2 className="absolute left-2.5 top-1/2 -translate-y-1/2 w-2.5 h-2.5 md:w-5 md:h-5 text-gray-500" />
                     <input
                       value={couponCode}
                       onChange={(e) => setCouponCode(e.target.value)}
-                      placeholder="Enter 'PAID' to confirm"
-                      className="w-full pl-11 md:pl-14 pr-4 py-4 md:py-5 rounded-xl md:rounded-2xl bg-white/[0.04] border border-white/10 focus:border-orange-500/60 outline-none transition-all text-sm md:text-base font-bold placeholder:text-gray-600"
+                      placeholder="Enter 'PAID'"
+                      className="w-full pl-7 md:pl-14 pr-2.5 py-1.5 md:py-5 rounded-md md:rounded-2xl bg-white/[0.04] border border-white/10 focus:border-orange-500/60 outline-none transition-all text-[9px] md:text-base font-bold placeholder:text-gray-600"
                     />
                   </div>
                 </div>
 
-                <div className="space-y-2.5">
-                  <label className="text-[10px] md:text-xs font-black uppercase tracking-widest text-gray-500 ml-1">
-                    Delivery Instructions
+                <div className="space-y-0.5 md:space-y-1">
+                  <label className="text-[6px] md:text-xs font-black uppercase tracking-widest text-gray-500 ml-1">
+                    Instructions
                   </label>
                   <textarea
                     value={deliveryInstructions}
                     onChange={(e) => setDeliveryInstructions(e.target.value)}
-                    className="w-full px-5 py-4 md:py-5 rounded-xl md:rounded-2xl bg-white/[0.04] border border-white/10 focus:border-orange-500/60 outline-none transition-all text-sm md:text-base font-medium placeholder:text-gray-600 resize-none"
-                    rows={3}
-                    placeholder="Gate code, drop-off point, etc..."
+                    className="w-full px-2.5 py-1.5 md:py-5 rounded-md md:rounded-2xl bg-white/[0.04] border border-white/10 focus:border-orange-500/60 outline-none transition-all text-[9px] md:text-base font-medium placeholder:text-gray-600 resize-none"
+                    rows={1}
+                    placeholder="Gate code, etc..."
                   />
                 </div>
               </div>
@@ -184,64 +184,64 @@ export const Payment = () => {
           </div>
 
           {/* Order Summary Section */}
-          <div className="bg-white/[0.03] backdrop-blur-xl rounded-2xl md:rounded-[40px] border border-white/10 shadow-2xl p-5 sm:p-8 md:p-10">
-            <h2 className="text-xs md:text-xl font-black uppercase tracking-widest text-gray-400 mb-6 md:mb-10">Order Summary</h2>
+          <div className="bg-white/[0.03] backdrop-blur-xl rounded-lg md:rounded-[40px] border border-white/10 shadow-2xl p-2 sm:p-8 md:p-10">
+            <h2 className="text-[6px] md:text-xl font-black uppercase tracking-widest text-gray-400 mb-1.5 md:mb-10">Summary</h2>
             
-            <div className="space-y-4 md:space-y-6">
+            <div className="space-y-1 md:space-y-6">
               <div className="flex justify-between items-center text-gray-400">
-                <span className="text-sm md:text-base font-medium">Subtotal</span>
-                <span className="text-sm md:text-base font-bold text-white">₹{currentSubtotal}</span>
+                <span className="text-[9px] md:text-base font-medium">Subtotal</span>
+                <span className="text-[9px] md:text-base font-bold text-white">₹{currentSubtotal}</span>
               </div>
               <div className="flex justify-between items-center text-gray-500">
-                <span className="text-xs md:text-sm font-medium">GST Tax</span>
-                <span className="text-xs md:text-sm font-bold">₹{extraCharges.gst}</span>
+                <span className="text-[8px] md:text-sm font-medium">GST Tax</span>
+                <span className="text-[8px] md:text-sm font-bold">₹{extraCharges.gst}</span>
               </div>
               <div className="flex justify-between items-center text-gray-500">
-                <span className="text-xs md:text-sm font-medium">Service Charge</span>
-                <span className="text-xs md:text-sm font-bold">₹{extraCharges.serviceCharge}</span>
+                <span className="text-[8px] md:text-sm font-medium">Service Charge</span>
+                <span className="text-[8px] md:text-sm font-bold">₹{extraCharges.serviceCharge}</span>
               </div>
               
-              <div className="pt-6 md:pt-8 mt-6 md:mt-8 border-t border-white/10">
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+              <div className="pt-2 md:pt-8 mt-2 md:mt-8 border-t border-white/10">
+                <div className="flex flex-row justify-between items-center gap-4">
                   <div>
-                    <span className="text-[10px] font-black uppercase tracking-widest text-gray-500 block mb-1">Total Payable</span>
-                    <span className="text-3xl md:text-5xl font-black text-white">₹{payable}</span>
+                    <span className="text-[6px] font-black uppercase tracking-widest text-gray-500 block">Total</span>
+                    <span className="text-sm md:text-5xl font-black text-white">₹{payable}</span>
                   </div>
-                  <div className="text-left sm:text-right">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-orange-500 block mb-1">Status</span>
-                    <span className="text-sm md:text-base font-bold text-orange-500/80">Pending Payment</span>
+                  <div className="text-right">
+                    <span className="text-[6px] font-black uppercase tracking-widest text-orange-500 block">Status</span>
+                    <span className="text-[8px] md:text-base font-bold text-orange-500/80">Pending</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="mt-8 md:mt-12 space-y-4 md:space-y-6">
+            <div className="mt-2.5 md:mt-12 space-y-2 md:space-y-6">
               {error && (
-                <div className="p-4 md:p-5 rounded-xl md:rounded-2xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm font-bold flex items-center gap-3 animate-shake">
-                  <div className="w-1.5 h-1.5 rounded-full bg-red-500"></div>
+                <div className="p-1.5 md:p-5 rounded-md md:rounded-2xl bg-red-500/10 border border-red-500/20 text-red-400 text-[8px] md:text-sm font-bold flex items-center gap-1.5 animate-shake">
+                  <div className="w-1 h-1 rounded-full bg-red-500"></div>
                   {error}
                 </div>
               )}
 
               {paymentSuccess && (
-                <div className="p-4 md:p-5 rounded-xl md:rounded-2xl bg-green-500/10 border border-green-500/20 text-green-400 text-sm font-bold flex items-center gap-3 animate-pulse">
-                  <CheckCircle2 className="h-5 w-5" />
-                  Payment confirmed! Redirecting...
+                <div className="p-1.5 md:p-5 rounded-md md:rounded-2xl bg-green-500/10 border border-green-500/20 text-green-400 text-[8px] md:text-sm font-bold flex items-center gap-1.5 animate-pulse">
+                  <CheckCircle2 className="h-2.5 w-2.5 md:h-5 md:w-5" />
+                  Confirmed!
                 </div>
               )}
 
               <button
                 onClick={handleConfirmPayment}
                 disabled={loading || paymentSuccess}
-                className="w-full bg-orange-500 hover:bg-orange-600 disabled:opacity-50 text-white py-4.5 md:py-6 px-8 rounded-xl md:rounded-2xl font-black text-base md:text-xl transition-all active:scale-[0.98] shadow-2xl shadow-orange-500/20 relative overflow-hidden group"
+                className="w-full bg-orange-500 hover:bg-orange-600 disabled:opacity-50 text-white py-2 md:py-6 px-4 rounded-md md:rounded-2xl font-black text-[10px] md:text-xl transition-all active:scale-[0.98] shadow-2xl shadow-orange-500/20 relative overflow-hidden group"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-shimmer"></div>
                 {loading ? (
-                  <div className="flex items-center justify-center gap-3">
-                    <div className="w-5 h-5 border-3 border-white/20 border-t-white rounded-full animate-spin"></div>
-                    Processing...
+                  <div className="flex items-center justify-center gap-1">
+                    <div className="w-2.5 h-2.5 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
+                    ...
                   </div>
-                ) : "Confirm & Place Order"}
+                ) : "Confirm Order"}
               </button>
             </div>
           </div>
