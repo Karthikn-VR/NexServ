@@ -310,191 +310,171 @@ export const Menu = () => {
             className="absolute inset-0 bg-black/80 backdrop-blur-sm"
             onClick={() => !isAdding && setShowAddModal(false)}
           />
-          <div className="relative w-full max-w-xl max-h-[90vh] bg-[#0d0b09] border border-white/10 rounded-3xl shadow-2xl overflow-hidden flex flex-col animate-in zoom-in duration-300">
-            <div className="flex items-center justify-between p-6 border-b border-white/5 flex-shrink-0">
-              <h2 className="text-xl font-bold">Add New Dish</h2>
+          <div className="relative w-full max-w-xl max-h-[90vh] bg-[#0d0b09] border border-white/10 rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden flex flex-col animate-in zoom-in duration-300 mx-4 md:mx-0">
+            <div className="flex items-center justify-between p-4 md:p-6 border-b border-white/5 flex-shrink-0">
+              <h2 className="text-lg md:text-xl font-bold">Add New Dish</h2>
               <button 
                 onClick={() => setShowAddModal(false)}
-                className="p-2 hover:bg-white/5 rounded-full transition-colors"
+                className="p-1.5 md:p-2 hover:bg-white/5 rounded-full transition-colors"
                 disabled={isAdding}
               >
                 <X className="w-5 h-5 text-gray-400" />
               </button>
             </div>
 
-            <form onSubmit={handleAddDish} className="p-6 space-y-6 overflow-y-auto flex-grow custom-scrollbar">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-gray-400 uppercase tracking-widest">Dish Name</label>
+            <form id="add-dish-form" onSubmit={handleAddDish} className="p-4 md:p-6 space-y-3 md:space-y-4 overflow-y-auto flex-grow custom-scrollbar">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+                <div className="space-y-1">
+                  <label className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Dish Name</label>
                   <input
                     required
                     type="text"
                     value={newDish.name}
                     onChange={(e) => setNewDish({ ...newDish, name: e.target.value })}
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 outline-none transition-all"
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 outline-none transition-all text-sm md:text-base placeholder:text-gray-600"
                     placeholder="e.g. Spicy Grilled Chicken"
                   />
                 </div>
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-gray-400 uppercase tracking-widest">Price (₹)</label>
+                <div className="space-y-1">
+                  <label className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Price (₹)</label>
                   <input
                     required
                     type="number"
                     value={newDish.price}
                     onChange={(e) => setNewDish({ ...newDish, price: e.target.value })}
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 outline-none transition-all"
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 outline-none transition-all text-sm md:text-base placeholder:text-gray-600"
                     placeholder="e.g. 299"
                   />
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-gray-400 uppercase tracking-widest">Category</label>
-                <select
-                  value={newDish.category}
-                  onChange={(e) => setNewDish({ ...newDish, category: e.target.value })}
-                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 outline-none transition-all appearance-none"
-                >
-                  {categories.filter(c => c !== "All").map(cat => (
-                    <option key={cat} value={cat} className="bg-[#0d0b09]">{cat}</option>
-                  ))}
-                </select>
+              <div className="space-y-1">
+                <label className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Category</label>
+                <div className="relative">
+                  <select
+                    value={newDish.category}
+                    onChange={(e) => setNewDish({ ...newDish, category: e.target.value })}
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 outline-none transition-all appearance-none text-sm md:text-base"
+                  >
+                    {categories.filter(c => c !== "All").map(cat => (
+                      <option key={cat} value={cat} className="bg-[#0d0b09]">{cat}</option>
+                    ))}
+                  </select>
+                  <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                  </div>
+                </div>
               </div>
 
-              <div className="space-y-4">
-                <div className="space-y-3">
-                  <label className="text-xs font-bold text-gray-400 uppercase tracking-widest">Dish Image</label>
-                  
-                  <div className="space-y-4">
-                    {/* File Upload / Drag & Drop */}
-                    <div className="relative group/upload">
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={handleImageUpload}
-                        className="hidden"
-                        id="image-upload"
-                        disabled={isUploading}
-                      />
-                      <label
-                        htmlFor="image-upload"
-                        onDragOver={handleDragOver}
-                        onDragLeave={handleDragLeave}
-                        onDrop={handleDrop}
-                        className={`flex flex-col items-center justify-center gap-3 px-4 py-10 bg-white/5 border-2 border-dashed rounded-3xl cursor-pointer transition-all duration-300 ${
-                          isDragging 
-                            ? 'border-orange-500 bg-orange-500/10 scale-[1.01]' 
-                            : 'border-white/10 hover:border-orange-500/50 hover:bg-white/[0.07]'
-                        } ${isUploading ? 'opacity-50 cursor-not-allowed' : ''}`}
-                      >
-                        {isUploading ? (
-                          <div className="flex flex-col items-center gap-2">
-                            <Loader2 className="w-10 h-10 animate-spin text-orange-500" />
-                            <p className="text-sm font-medium text-orange-500">Uploading...</p>
-                          </div>
-                        ) : (
-                          <>
-                            <div className={`p-4 rounded-2xl bg-white/5 transition-colors duration-300 ${isDragging ? 'bg-orange-500/20' : 'group-hover/upload:bg-orange-500/10'}`}>
-                              <Upload className={`w-8 h-8 transition-all duration-300 ${isDragging ? 'scale-110 text-orange-500' : 'text-gray-400 group-hover/upload:text-orange-500'}`} />
-                            </div>
-                            <div className="text-center">
-                              <p className="text-base font-bold text-white">
-                                {isDragging ? 'Drop to upload' : 'Click or drag image to upload'}
-                              </p>
-                              <p className="text-xs text-gray-500 mt-1 uppercase tracking-widest font-medium">
-                                PNG, JPG or WebP up to 5MB
-                              </p>
-                            </div>
-                          </>
-                        )}
-                      </label>
-                    </div>
+              <div className="space-y-1">
+                <label className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Description</label>
+                <textarea
+                  value={newDish.description}
+                  onChange={(e) => setNewDish({ ...newDish, description: e.target.value })}
+                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 outline-none transition-all text-sm md:text-base placeholder:text-gray-600 resize-none"
+                  rows={2}
+                  placeholder="Tell us about this dish..."
+                />
+              </div>
 
-                    <div className="relative flex items-center gap-4">
-                      <div className="h-px flex-1 bg-white/10"></div>
-                      <span className="text-[10px] font-black text-gray-600 uppercase tracking-[0.3em]">OR</span>
-                      <div className="h-px flex-1 bg-white/10"></div>
-                    </div>
+              <div className="space-y-2">
+                <label className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Dish Image</label>
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {/* File Upload */}
+                  <div className="relative group/upload">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      className="hidden"
+                      id="image-upload"
+                      disabled={isUploading}
+                    />
+                    <label
+                      htmlFor="image-upload"
+                      onDragOver={handleDragOver}
+                      onDragLeave={handleDragLeave}
+                      onDrop={handleDrop}
+                      className={`flex flex-col items-center justify-center h-24 md:h-32 bg-white/5 border-2 border-dashed rounded-xl cursor-pointer transition-all duration-300 ${
+                        isDragging 
+                          ? 'border-orange-500 bg-orange-500/10' 
+                          : 'border-white/10 hover:border-orange-500/50 hover:bg-white/[0.07]'
+                      } ${isUploading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    >
+                      {isUploading ? (
+                        <Loader2 className="w-5 h-5 animate-spin text-orange-500" />
+                      ) : (
+                        <>
+                          <Upload className={`w-5 h-5 mb-1 transition-colors ${isDragging ? 'text-orange-500' : 'text-gray-500'}`} />
+                          <span className="text-[10px] font-bold text-gray-400">Upload Image</span>
+                        </>
+                      )}
+                    </label>
+                  </div>
 
-                    {/* URL Input */}
+                  {/* URL Input */}
+                  <div className="flex flex-col justify-center gap-2">
                     <div className="relative group/url">
-                      <div className="absolute left-4 top-1/2 -translate-y-1/2 p-1.5 rounded-lg bg-white/5 text-gray-500 group-focus-within/url:text-orange-500 transition-colors">
-                        <ImageIcon className="w-4 h-4" />
-                      </div>
+                      <ImageIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
                       <input
                         type="text"
                         value={newDish.image_url}
                         onChange={(e) => setNewDish({ ...newDish, image_url: e.target.value })}
-                        className="w-full pl-14 pr-4 py-4 bg-white/5 border border-white/10 rounded-2xl focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 outline-none transition-all text-sm placeholder:text-gray-600"
-                        placeholder="Paste an image URL from the web..."
+                        className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 outline-none transition-all text-xs md:text-sm placeholder:text-gray-600"
+                        placeholder="Or paste image URL..."
                       />
                     </div>
                   </div>
-
-                  {newDish.image_url && (
-                    <div className="mt-4 animate-in fade-in zoom-in duration-300">
-                      <div className="relative w-full aspect-video rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-                        <img 
-                          src={newDish.image_url.startsWith('/static') ? `${import.meta.env.VITE_API_URL || 'http://localhost:8000'}${newDish.image_url}` : newDish.image_url} 
-                          alt="Preview" 
-                          className="w-full h-full object-cover"
-                          onError={(e) => {
-                            e.target.src = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80";
-                          }}
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                        <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                          <span className="px-3 py-1 bg-orange-500 text-white text-[10px] font-bold rounded-full uppercase tracking-wider">Image Preview</span>
-                          <button
-                            type="button"
-                            onClick={() => setNewDish({ ...newDish, image_url: "" })}
-                            className="p-2 bg-red-500/20 backdrop-blur-md text-red-500 rounded-xl hover:bg-red-500 hover:text-white transition-all duration-300 border border-red-500/20"
-                          >
-                            <X className="w-4 h-4" />
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  )}
                 </div>
-              </div>
 
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-gray-400 uppercase tracking-widest">Description</label>
-                <textarea
-                  rows="3"
-                  value={newDish.description}
-                  onChange={(e) => setNewDish({ ...newDish, description: e.target.value })}
-                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 outline-none transition-all resize-none"
-                  placeholder="Tell customers about your delicious dish..."
-                />
-              </div>
-
-              <div className="flex items-center gap-4 pt-4">
-                <button
-                  type="button"
-                  onClick={() => setShowAddModal(false)}
-                  className="flex-1 px-6 py-3.5 border border-white/10 hover:bg-white/5 rounded-2xl font-bold transition-all"
-                  disabled={isAdding}
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  disabled={isAdding}
-                  className="flex-1 px-6 py-3.5 bg-orange-500 hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-2xl font-bold transition-all shadow-lg shadow-orange-500/20 flex items-center justify-center gap-2"
-                >
-                  {isAdding ? (
-                    <>
-                      <Loader2 className="w-5 h-5 animate-spin" />
-                      Adding...
-                    </>
-                  ) : (
-                    'Create Dish'
-                  )}
-                </button>
+                {newDish.image_url && (
+                  <div className="relative aspect-video rounded-xl overflow-hidden border border-white/10 group mt-2">
+                    <img 
+                      src={newDish.image_url.startsWith('/static') ? `${import.meta.env.VITE_API_URL || 'http://localhost:8000'}${newDish.image_url}` : newDish.image_url} 
+                      alt="Preview" 
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.target.src = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80";
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <button
+                        type="button"
+                        onClick={() => setNewDish({ ...newDish, image_url: "" })}
+                        className="bg-red-500 text-white p-2 rounded-full hover:bg-red-600 transition-colors"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             </form>
+
+            <div className="p-4 md:p-6 border-t border-white/5 flex flex-col sm:flex-row gap-3">
+              <button
+                type="button"
+                onClick={() => setShowAddModal(false)}
+                className="flex-1 px-6 py-3.5 border border-white/10 rounded-xl md:rounded-2xl font-bold text-gray-400 hover:text-white hover:bg-white/5 transition-all order-2 sm:order-1"
+                disabled={isAdding}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                form="add-dish-form"
+                className="flex-1 px-6 py-3.5 bg-orange-500 hover:bg-orange-600 text-white rounded-xl md:rounded-2xl font-bold transition-all shadow-lg shadow-orange-500/20 active:scale-95 disabled:opacity-50 order-1 sm:order-2 flex items-center justify-center gap-2"
+                disabled={isAdding || !newDish.name || !newDish.price}
+              >
+                {isAdding ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    <span>Adding...</span>
+                  </>
+                ) : "Add Dish"}
+              </button>
+            </div>
           </div>
         </div>
       )}

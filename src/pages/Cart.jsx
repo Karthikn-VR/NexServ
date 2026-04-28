@@ -188,13 +188,13 @@ export const Cart = () => {
                     </div>
                     <div className="p-4">
                       <h3 className="text-sm font-bold text-white line-clamp-1 group-hover:text-orange-500 transition-colors">{item.name}</h3>
-                      <div className="flex items-center justify-between mt-3">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between mt-3 gap-3">
                         <span className="text-orange-500 font-black text-sm">₹{item.price}</span>
                         <button 
                           onClick={() => addToCart(item)}
-                          className="w-8 h-8 bg-orange-500 text-white rounded-xl hover:bg-orange-600 transition-all shadow-lg shadow-orange-500/20 flex items-center justify-center active:scale-90"
+                          className="w-full sm:w-10 h-10 bg-orange-500 text-white rounded-xl hover:bg-orange-600 transition-all shadow-lg shadow-orange-500/20 flex items-center justify-center active:scale-90"
                         >
-                          <Plus className="h-4 w-4" />
+                          <Plus className="h-5 w-5" />
                         </button>
                       </div>
                     </div>

@@ -379,7 +379,7 @@ export const LandingPage = () => {
                 src={HERO_DISH.strMealThumb}
                 alt={HERO_DISH.strMeal}
                 data-testid="hero-dish-image"
-                className="w-[250px] h-[250px] md:w-[420px] md:h-[420px] object-cover rounded-full shadow-[0_30px_80px_-20px_rgba(0,0,0,0.9)] border-[4px] md:border-[6px] border-white/[0.04]"
+                className="w-full max-w-[250px] md:max-w-[420px] max-h-[250px] md:max-h-[400px] object-cover rounded-full shadow-[0_30px_80px_-20px_rgba(0,0,0,0.9)] border-[4px] md:border-[6px] border-white/[0.04]"
               />
               {/* orbit floats */}
               <div className="absolute -top-4 left-2 w-12 h-12 md:w-20 md:h-20 rounded-full bg-[#1a1410]/80 backdrop-blur-md p-1.5 md:p-2 border border-white/10 shadow-xl animate-bounce-slow">
@@ -467,7 +467,7 @@ export const LandingPage = () => {
                     <img
                       src={item.thumb}
                       alt={item.name}
-                      className="w-40 h-40 md:w-56 md:h-56 object-cover rounded-full shadow-2xl"
+                      className="w-full max-w-[160px] md:max-w-[224px] max-h-[160px] md:max-h-[224px] object-cover rounded-full shadow-2xl"
                     />
                     <h4 className="mt-4 md:mt-6 font-bold text-center text-sm md:text-base truncate w-full">
                       {item.name}

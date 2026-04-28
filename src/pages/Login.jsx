@@ -110,7 +110,7 @@ export const Login = () => {
             <img
               src={HERO_IMG}
               alt="Featured plate"
-              className="w-[300px] md:w-[380px] h-[300px] md:h-[380px] object-cover rounded-full shadow-[0_50px_120px_-20px_rgba(0,0,0,0.9)] border-[6px] border-white/[0.04]"
+              className="w-full max-w-[300px] md:max-w-[380px] max-h-[250px] md:max-h-[400px] object-cover rounded-full shadow-[0_50px_120px_-20px_rgba(0,0,0,0.9)] border-[6px] border-white/[0.04]"
             />
           </div>
 
