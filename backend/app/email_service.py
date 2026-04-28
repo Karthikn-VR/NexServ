@@ -16,6 +16,11 @@ def _get_smtp_config():
     user = settings.SMTP_USER
     password = settings.SMTP_PASS
 
+    # Debug: Print the actual values
+    print(f'[EMAIL DEBUG] SMTP_HOST: {host!r}')
+    print(f'[EMAIL DEBUG] SMTP_USER: {user!r}')
+    print(f'[EMAIL DEBUG] SMTP_PASS: {"*" * len(password) if password else "None"}')
+
     if not host or not user or not password:
         print(f'[EMAIL] CONFIGURATION ERROR: SMTP settings incomplete. Check .env file.')
         return None
