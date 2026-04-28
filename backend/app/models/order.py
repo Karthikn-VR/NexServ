@@ -12,7 +12,6 @@ class Order(Base):
     final_amount = Column(Float, nullable=False)
     address = Column(Text, nullable=False)
     email = Column(String, nullable=False)
-    special_instructions = Column(Text, nullable=True)
     rejection_reason = Column(Text, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 

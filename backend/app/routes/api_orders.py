@@ -85,8 +85,7 @@ def create_order(
             address=address_str,
             email=payload.email,
             total_amount=total,
-            final_amount=final,
-            special_instructions=payload.special_instructions
+            final_amount=final
         )
         
         # Send bill email

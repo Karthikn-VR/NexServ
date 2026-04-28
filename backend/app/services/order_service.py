@@ -37,7 +37,6 @@ def create_order(
     email: str,
     total_amount: float,
     final_amount: float,
-    special_instructions: str | None = None,
 ) -> models.Order:
     order = models.Order(
         user_id=user_id,
@@ -45,8 +44,7 @@ def create_order(
         total_amount=total_amount,
         final_amount=final_amount,
         address=address,
-        email=email,
-        special_instructions=special_instructions
+        email=email
     )
     db.add(order)
     db.flush()  # Get order ID
